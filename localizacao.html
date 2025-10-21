@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html class="wide wow-animation" lang="pt-BR">
+  <head>
+    <title>Locaki Jundiaí - Aluguel de Mesas, Cadeiras, Toalhas e Utensílios para Festas</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Locaki Jundiaí: Aluguel de mesas, cadeiras, toalhas, copos, pratos, talheres e utensílios para festas e eventos. Entrega rápida, variedade de produtos e atendimento especializado.">
+    <meta name="keywords" content="aluguel de mesas, aluguel de cadeiras, aluguel de toalhas, aluguel de utensílios, aluguel de copos, aluguel de pratos, aluguel de talheres, festa, eventos, Jundiaí, Locaki, locação para festas, aluguel de materiais para festas, aluguel de móveis para eventos, aluguel de acessórios para festas, aluguel de banquetas, aluguel de aparadores, aluguel de sousplat, aluguel de rechaud, aluguel de bancos, aluguel de móveis Jundiaí, aluguel de decoração, aluguel de mesas redondas, aluguel de mesas retangulares, aluguel de mesas quadradas, aluguel de cadeiras plásticas, aluguel de cadeiras de madeira, aluguel de cadeiras para casamento, aluguel de cadeiras para eventos, aluguel de cadeiras para festas, aluguel de mesas para festas, aluguel de mesas para eventos, aluguel de mesas para casamento">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="canonical" href="https://locaki.com.br/localizacao.html">
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,700%7CLato:300,300italic,400,400italic,700,900%7CPlayfair+Display:700italic,900">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+      /* Estilos para o WhatsApp flutuante aprimorado */
+      .whatsapp-float {
+        position: fixed;
+        width: 70px;
+        height: 70px;
+        bottom: 40px;
+        right: 40px;
+        background-color: #FF4CFF;
+        color: #FFF;
+        border-radius: 50%;
+        text-align: center;
+        font-size: 36px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        animation: pulse 2s infinite;
+      }
+      
+      .whatsapp-float:hover {
+        background-color: #25D366;
+        transform: scale(1.1);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+      }
+      
+      .whatsapp-float i {
+        margin-top: 0;
+      }
+      
+      @keyframes pulse {
+        0% {
+          box-shadow: 0 0 0 0 rgba(255, 76, 255, 0.7);
+        }
+        70% {
+          box-shadow: 0 0 0 15px rgba(255, 76, 255, 0);
+        }
+        100% {
+          box-shadow: 0 0 0 0 rgba(255, 76, 255, 0);
+        }
+      }
+      
+      /* Melhorias na seção de localização */
+      .location-info {
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        padding: 30px;
+        margin-bottom: 30px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      }
+      
+      .location-info h3 {
+        color: #333;
+        margin-bottom: 20px;
+        font-weight: 700;
+      }
+      
+      .location-details {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin-bottom: 25px;
+      }
+      
+      .location-detail-item {
+        flex: 1;
+        min-width: 250px;
+      }
+      
+      .location-detail-item h4 {
+        color: #555;
+        margin-bottom: 10px;
+        font-size: 1.1rem;
+      }
+      
+      .location-detail-item p {
+        margin-bottom: 5px;
+      }
+      
+      .map-container {
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+      
+      .navigation-buttons {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+        flex-wrap: wrap;
+      }
+      
+      .nav-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 20px;
+        background-color: #FF4CFF;
+        color: white;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        flex: 1;
+        min-width: 200px;
+      }
+      
+      .nav-button:hover {
+        background-color: #25D366;
+        color: white;
+        transform: translateY(-3px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      }
+      
+      .nav-button img {
+        margin-right: 10px;
+        max-height: 24px;
+      }
+      
+      /* Melhorias de SEO e acessibilidade */
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+      
+      /* Melhorias responsivas */
+      @media (max-width: 768px) {
+        .whatsapp-float {
+          width: 60px;
+          height: 60px;
+          bottom: 20px;
+          right: 20px;
+          font-size: 30px;
+        }
+        
+        .location-details {
+          flex-direction: column;
+        }
+        
+        .navigation-buttons {
+          flex-direction: column;
+        }
+        
+        .nav-button {
+          min-width: 100%;
+        }
+      }
+    </style>
+    <!-- Estrutura de dados para SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Locaki - Aluguel de Mesas, Cadeiras, Toalhas e Utensílios para Festas",
+      "image": "https://locaki.com.br/images/logo-default-450x372.fw.png",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Av. Comendador Antônio Borin, 4600",
+        "addressLocality": "Jundiaí",
+        "addressRegion": "SP",
+        "postalCode": "13218-640",
+        "addressCountry": "BR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -23.1677439,
+        "longitude": -46.847218
+      },
+      "url": "https://locaki.com.br/localizacao.html",
+      "telephone": "+55 11 97153-7112",
+      "email": "atendimento@locaki.com.br",
+      "openingHours": "Mo-Fr 08:30-12:00,13:00-17:00 Sa 08:30-12:00",
+      "priceRange": "Consultar",
+      "sameAs": [
+        "https://www.facebook.com/locaki",
+        "https://www.instagram.com/locaki_locacao/"
+      ]
+    }
+    </script>
+    <!-- Produtos para indexação -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      "name": "Produtos para Locação",
+      "itemListElement": [
+        {
+          "@type": "Product",
+          "name": "Mesas para Festa",
+          "url": "https://locaaqui.com.br/ProdutosCategoria.html?idCategoria=4&cidade=Jundiai"
+        },
+        {
+          "@type": "Product",
+          "name": "Cadeiras para Festa",
+          "url": "https://locaaqui.com.br/ProdutosCategoria.html?idCategoria=35&cidade=Jundiai"
+        },
+        {
+          "@type": "Product",
+          "name": "Toalhas para Festa",
+          "url": "https://locaaqui.com.br/ProdutosCategoria.html?idCategoria=22&cidade=Jundiai"
+        },
+        {
+          "@type": "Product",
+          "name": "Utensílios para Festa",
+          "url": "https://locaaqui.com.br/ProdutosCategoria.html?idCategoria=32"
+        }
+      ]
+    }
+    </script>
+  </head>
+
+  <div align="center" class="bg-black">
+     <table border="0,5">
+     	<td></td>
+      </table>
+     </div>
+
+     
+  <body>
+    <div class="preloader">
+      <div>
+        <a href="index.html"><img src="images/logo-default-450x372.fw.png" alt="Locaki - Aluguel para Festas" width="378" height="57"/></a>
+        <div class="page-loader-body">
+          <div id="spinningSquaresG">
+            <div class="spinningSquaresG" id="spinningSquaresG_1"></div>
+            <div class="spinningSquaresG" id="spinningSquaresG_2"></div>
+            <div class="spinningSquaresG" id="spinningSquaresG_3"></div>
+            <div class="spinningSquaresG" id="spinningSquaresG_4"></div>
+            <div class="spinningSquaresG" id="spinningSquaresG_5"></div>
+            <div class="spinningSquaresG" id="spinningSquaresG_6"></div>
+            <div class="spinningSquaresG" id="spinningSquaresG_7"></div>
+            <div class="spinningSquaresG" id="spinningSquaresG_8"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="page">
+      <header class="page-head">
+        <div class="rd-navbar-wrap">
+          <nav class="rd-navbar rd-navbar-default" data-layout="rd-navbar-fixed" data-sm-layout="rd-navbar-fixed" data-md-layout="rd-navbar-fixed" data-md-device-layout="rd-navbar-fixed" data-lg-layout="rd-navbar-static" data-lg-device-layout="rd-navbar-fixed" data-xl-layout="rd-navbar-static" data-xl-device-layout="rd-navbar-static" data-xxl-layout="rd-navbar-static" data-xxl-device-layout="rd-navbar-static" data-lg-stick-up="true" data-xl-stick-up="true" data-xxl-stick-up="true" data-lg-stick-up-offset="60px" data-xl-stick-up-offset="60px" data-xxl-stick-up-offset="60px">
+            <div class="rd-navbar-inner">
+              <div class="rd-navbar-panel">
+                <button class="rd-navbar-toggle" data-custom-toggle=".rd-navbar-nav-wrap" data-custom-toggle-disable-on-blur="true"><span></span></button>
+                <a class="rd-navbar-brand brand" href="index.html"><img src="images/image_index/logo-default-139x22.fw.png" alt="Locaki - Aluguel para Festas" width="139" height="22"/></a>
+              </div>
+              <div class="rd-navbar-group rd-navbar-search-wrap">
+                <div class="rd-navbar-nav-wrap">
+                  <div class="rd-navbar-nav-inner">
+                    <ul class="rd-navbar-nav">
+                       <li class="rd-nav-item"><a class="rd-nav-link" href="index.html">Inicio</a>
+                      </li>
+                      <li class="rd-nav-item active"><a class="rd-nav-link" href="produtos.html">Produtos</a>
+                      </li>
+                      <li class="rd-nav-item"><a class="rd-nav-link" href="localizacao.html">Localização</a>
+                      </li>
+                      <li class="rd-nav-item"><a class="rd-nav-link" href="pqlocar.html">Pq Alugar?</a></li>
+                       <li class="rd-nav-item"><a class="rd-nav-link" href="simulador.html">Simulador</a></li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="rd-navbar-shop">
+                  <a class="novi-icon link-shop material-icons-shopping_cart" href="https://locaaqui.com.br/home.html?cidade=jundiai" aria-label="Orçamento Online"></a>
+                </div>
+              </div>
+            </div>
+          </nav>
+        </div>
+      </header>
+      <div align="center" class="bg-black">
+     <table border="0">
+     	<td></td>
+      </table>
+     </div>
+      <main>
+        <section class="section section-50 section-md-90 section-xl-top-120 section-xl-bottom-145">
+          <div class="container isotope-wrap">
+            <div class="row row-40">
+              <div class="col-sm-12 text-center">
+              	<h3><span>Localização</span><em>Locaki</em><span>Jundiai</span></h3>              
+                <div class="location-info">
+                  <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3773.1545490395056!2d-46.849496824563715!3d-23.167299579072562!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cf27bb87139b3d%3A0xdc9c7e8b597ac56e!2sLocaki%20-%20Aluguel%20de%20materiais%20para%20festa%20Jundia%C3%AD%20-%20Ki-Festa%20-!5e1!3m2!1spt-BR!2sbr!4v1754664865692!5m2!1spt-BR!2sbr" width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Localização da Locaki no mapa"></iframe>
+                  </div>
+                  
+                  <div class="navigation-buttons">
+                    <a href="https://ul.waze.com/ul?place=ChIJPZsTh7snz5QRbsV6WYt-nNw&ll=-23.16723030%2C-46.84731580&navigate=yes&utm_campaign=waze_website&utm_source=waze_website&utm_medium=lm_share_location" target="_blank" rel="noopener" class="nav-button">
+                      <img src="images/iniciar.png" alt="Ícone Waze" width="24" height="24">
+                      <span>Como chegar pelo Waze</span>
+                    </a>
+                    
+                    <a href="https://www.google.com.br/maps/dir//locaki/@-23.1671475,-46.8823351,13z/data=!4m8!4m7!1m0!1m5!1m1!1s0x94cf27bb87139b3d:0xdc9c7e8b597ac56e!2m2!1d-46.8473158!2d-23.1672303" target="_blank" rel="noopener" class="nav-button">
+                      <img src="images/iniciar2.fw.png" alt="Ícone Google Maps" width="24" height="24">
+                      <span>Como chegar pelo Google Maps</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <section class="section section-50 section-md-90 section-xl-top-120 section-xl-bottom-145" id="section-start-journey">
+          <div class="container">
+            <div class="row row-40 row-md-60 align-items-lg-end justify-content-lg-center">
+              <div class="col-md-10 col-lg-5 wow fadeInLeftSmall" data-wow-duration="1s" data-wow-offset="200">
+                <h2 class="h3">Aluguel de Mesas, Cadeiras e Utensílios para Festas em Jundiaí</h2>
+                <p class="text-secondary">Encontre o tipo de mesa, cadeira, toalha ou utensílio ideal para seu evento. Entrega rápida, variedade de modelos e atendimento especializado.</p>
+                <a class="button button-xl button-primary" href="produtos.html" target="_blank" rel="noopener">Ver Catálogo Completo</a>
+              </div>
+              <div class="col-md-11 col-lg-7">
+                <div class="image-group">
+                  <figure class="wow fadeInRightSmall" data-wow-duration=".9s" data-wow-delay=".0s" data-wow-offset="80"><img src="images/image_index/home4-243x199.png" alt="Mesas para Festa" width="243" height="199"/></figure>
+                  <figure class="wow fadeInRightSmall" data-wow-duration=".9s" data-wow-delay=".2s" data-wow-offset="200"><img src="images/image_index/home4-508x341.png" alt="Cadeiras para Festa" width="508" height="341"/></figure>
+                  <figure class="wow fadeInRightSmall" data-wow-duration=".9s" data-wow-delay=".4s" data-wow-offset="300"><img src="images/image_index/home4-689x469.png" alt="Toalhas e Utensílios para Festa" width="689" height="469"/></figure>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        
+        <section class="section section-50 section-md-90 section-xl-top-120">
+          <div class="container">
+            <div class="text-center">
+              <h2>Seu evento no seu <em>estilo</em></h2>
+              <p><span class="d-inline-block" style="max-width: 580px;">Aluguel de mesas, cadeiras, copos, pratos, talheres, toalhas e muito mais para festas e eventos em Jundiaí e região.</span></p>
+            </div>
+            <div class="row row-30">
+              <div class="col-sm-6 col-md-3">
+                <div class="link-image-wrap"><a class="link-image" href="https://locaaqui.com.br/ProdutosCategoria.html?idCategoria=32"><img src="images/image_index/clients-1-126x68.png" alt="Utensílios para Festa" width="126" height="68"/></a></div>
+              </div>
+              <div class="col-sm-6 col-md-3">
+                <div class="link-image-wrap"><a class="link-image" href="https://locaaqui.com.br/ProdutosCategoria.html?idCategoria=4&cidade=Jundiai"><img src="images/image_index/clients-2-126x100.png" alt="Mesas para Festa" width="126" height="100"/></a></div>
+              </div>
+              <div class="col-sm-6 col-md-3">
+                <div class="link-image-wrap"><a class="link-image" href="https://locaaqui.com.br/ProdutosCategoria.html?idCategoria=35&cidade=Jundiai"><img src="images/image_index/clients-4-169x68.png" alt="Cadeiras para Festa" width="169" height="68"/></a></div>
+              </div>
+              <div class="col-sm-6 col-md-3">
+                <div class="link-image-wrap"><a class="link-image" href="https://locaaqui.com.br/ProdutosCategoria.html?idCategoria=22&cidade=Jundiai"><img src="images/image_index/clients-6-138x55.png" alt="Toalhas para Festa" width="138" height="55"/></a></div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+      
+      <section class="section section-40 section-md-top-75 section-md-bottom-60 bg-cod-gray novi-background">
+        <div class="container text-center text-md-start">
+          <div class="row row-30 align-items-md-center justify-content-lg-center justify-content-xl-start">
+            <div class="col-lg-11 col-xl-3">
+              <a class="Bland" href="index.html"><img src="images/image_index/logo-inverse-139x22.fw.png" alt="Locaki - Aluguel para Festas" width="220" height="74"/></a>
+            </div>
+            <div class="col-md-7 col-lg-6 col-xl-5">
+              <div class="wrap-justify">
+                <address class="contact-info text-start">
+                  <div class="unit unit-horizontal unit-spacing-xs align-items-center justify-content-center unit-sm-left">
+                    <div class="unit-left"><span class="novi-icon icon icon-md-custom icon-gunsmoke material-icons-place"></span></div>
+                    <div class="unit-body fw-light">
+                      <a class="link-light-03 d-inline" href="https://www.google.com/maps/dir/-23.1750195,-46.8543534/Locaki+-+Aluguel+de+festa+Jundiai+-+Av.+Comendador+Ant%C3%B4nio+Borin,+4600+-+Caxambu,+Jundia%C3%AD+-+SP,+13218-665,+Brasil/@-23.1721157,-46.8552194,16z/data=!3m1!4b1!4m9!4m8!1m1!4e1!1m5!1m1!1s0x94cf27bb87139b3d:0xdc9c7e8b597ac56e!2m2!1d-46.847218!2d-23.1677439" target="_blank" rel="noopener">
+                        <strong>Av. Comendador Antônio Borin, 4600 - Caxambu, Jundiaí - SP, 13218-640</strong>
+                      </a>
+                    </div>
+                  </div>
+                </address>
+                <address class="contact-info text-start">
+                  <div class="unit unit-horizontal unit-spacing-xs align-items-center justify-content-center unit-sm-left">
+                    <div class="unit-left"><span class="novi-icon icon icon-md-custom icon-gunsmoke material-icons-phone"></span></div>
+                    <div class="unit-body fw-light">
+                      <div class="link-wrap"><a class="link-light-03" href="tel:11971537112"><strong>11 97153-7112</strong></a></div>
+                      <div class="link-wrap"><a class="link-light-03" href="mailto:atendimento@locaki.com.br"><strong>atendimento@locaki.com.br</strong></a></div>
+                    </div>
+                  </div>
+                </address>
+              </div>
+            </div>
+            <div class="col-md-5 col-xl-4 text-lg-center">
+              <ul class="list-inline list-inline-xs">
+                <p><strong>Horário de Atendimento:</strong><br>
+                  Segunda a Sexta, das 8:30 às 12:00 e das 13:00 às 17:00.<br>
+                  Sábados, das 8:30 às 12:00.</p>
+              </ul>
+            </div>
+            <div class="col-md-5 col-xl-4 text-lg-center">
+              <ul class="list-inline list-inline-xs">
+                <li><a class="novi-icon icon icon-sm-custom link-tundora fa-facebook" href="https://www.facebook.com/locaki" target="_blank" rel="noopener" aria-label="Facebook"></a></li>
+                <li><a class="novi-icon icon icon-sm-custom link-tundora fa-linkedin" href="https://www.linkedin.com/company/locaki-loca%C3%A7%C3%A3o-para-festa-jundia%C3%AD" aria-label="LinkedIn"></a></li>
+                <li><a class="novi-icon icon icon-sm-custom link-tundora fa-youtube" href="https://www.youtube.com/@kifestaLocadora" aria-label="YouTube"></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+      
+      <footer class="page-foot page-foot-default section-35 bg-black novi-background text-center">
+        <div class="container">
+          <p class="rights small">
+            <span>Locaki - </span>
+            <span>&nbsp;&#169;&nbsp;</span>
+            <span class="copyright-year"></span>
+            <span>Todos os direitos reservados.</span>
+            <br class="d-md-none">
+            <span>Desenvolvido por <a class="link-primary" href="https://locaaqui.com.br/" target="_blank" rel="noopener">Locaaqui.com.br</a></span>
+          </p>
+        </div>
+        
+        <!-- WhatsApp Flutuante Aprimorado -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <a href="https://wa.me/5511971537112?text=Olá%20eu%20estava%20no%20site%20e%20gostaria%20de%20mais%20informações%20sobre%20locação" class="whatsapp-float" target="_blank" aria-label="Entre em contato pelo WhatsApp">
+          <i class="fa fa-whatsapp"></i>
+        </a>
+      </footer>
+    </div>
+    
+    <div class="snackbars" id="form-output-global"></div>
+    <script src="js/core.min.js"></script>
+    <script src="js/script.js"></script>
+  </body>
+</html>

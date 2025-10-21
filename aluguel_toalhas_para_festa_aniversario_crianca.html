@@ -1,0 +1,324 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Aluguel de toalhas longas para mesa em Jundiaí. Locação de toalhas para festas, casamentos e eventos. Faça a festa com elegância e praticidade!">
+  <meta name="keywords" content="aluguel de toalhas longas, locação de toalhas para mesa, toalhas para festas, toalhas para eventos, aluguel de toalhas Jundiaí, locação de toalhas Jundiaí, toalhas para casamento, faça a festa, Locaki, Grupo Ki-Festa">
+  <meta name="author" content="Locaki">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <title>Aluguel de Toalhas Longas para Mesa | Locaki - Faça a Festa!</title>
+  <!-- Open Graph SEO -->
+  <meta property="og:title" content="Aluguel de Toalhas Longas para Mesa | Locaki">
+  <meta property="og:description" content="Locação de toalhas longas para mesa em Jundiaí. Faça a festa com elegância e praticidade!">
+  <meta property="og:image" content="images/logo-default-450x37.png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://www.locaki.com.br/aluguel_toalhas_longa.html">
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="Site2/css/bootstrap.css">
+  <link rel="stylesheet" href="Site2/css/fonts.css">
+  <link rel="stylesheet" href="Site2/css/style.css">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Montserrat:400,500,600,700%7CPoppins:400%7CTeko:300,400">
+  <style>
+    .hero-section {
+      background: linear-gradient(120deg, #fff 60%, #f5e6ff 100%);
+      padding: 60px 0 30px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-section h1 {
+      font-size: 2.5rem;
+      color: #a259c6;
+      font-weight: 700;
+      letter-spacing: 2px;
+      margin-bottom: 18px;
+      text-shadow: 1px 2px 0 #fff;
+      animation: bounceIn 1.2s;
+    }
+    .hero-section p {
+      font-size: 1.2rem;
+      color: #444;
+      margin-bottom: 30px;
+      animation: fadeIn 1.8s;
+    }
+    @keyframes bounceIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      60% { transform: scale(1.05); opacity: 1; }
+      100% { transform: scale(1); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .product-listing {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      justify-content: center;
+      margin: 40px 0;
+    }
+    .product-card {
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(162,89,198,0.10);
+      padding: 20px;
+      width: 320px;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .product-card:hover {
+      transform: translateY(-10px) scale(1.04) rotate(-1deg);
+      box-shadow: 0 8px 32px rgba(162,89,198,0.18);
+      z-index: 2;
+    }
+    .product-card img {
+      max-width: 90%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 8px rgba(162,89,198,0.08);
+      transition: filter 0.3s;
+    }
+    .product-card:hover img {
+      filter: brightness(1.08) saturate(1.2);
+    }
+    .product-card h3 {
+      font-size: 1.2rem;
+      color: #a259c6;
+      margin: 10px 0 8px;
+      font-weight: 600;
+    }
+    .product-card p {
+      font-size: 1rem;
+      color: #555;
+      margin-bottom: 12px;
+    }
+    .product-card .btn {
+      background: #a259c6;
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      padding: 8px 24px;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+    .product-card .btn:hover {
+      background: #7c3fa0;
+      color: #fff;
+    }
+    .cta-section {
+      background: #f5e6ff;
+      padding: 32px 0;
+      text-align: center;
+      border-radius: 12px;
+      margin: 40px 0 0 0;
+    }
+    .cta-section h2 {
+      color: #a259c6;
+      font-size: 2rem;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+    .cta-section p {
+      color: #444;
+      font-size: 1.1rem;
+      margin-bottom: 18px;
+    }
+    .cta-section a {
+      margin: 0 8px;
+      display: inline-block;
+    }
+    /* WhatsApp Floating Button */
+    .whatsapp-float {
+      position: fixed;
+      width: 64px;
+      height: 64px;
+      bottom: 32px;
+      right: 32px;
+      background: #FF4CFF;
+      color: #fff;
+      border-radius: 50%;
+      text-align: center;
+      font-size: 38px;
+      box-shadow: 0 4px 16px #888;
+      z-index: 1000;
+      animation: pulse 1.5s infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .whatsapp-float:hover {
+      background: #B200B2;
+      color: #fff;
+      text-decoration: none;
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 #FF4CFF88; }
+      70% { box-shadow: 0 0 0 16px #FF4CFF00; }
+      100% { box-shadow: 0 0 0 0 #FF4CFF00; }
+    }
+    @media (max-width: 900px) {
+      .product-listing { flex-direction: column; align-items: center; }
+      .product-card { width: 95%; }
+    }
+  </style>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+</head>
+<body>
+  <!-- Menu/Header -->
+  <header class="section page-header">
+    <nav class="rd-navbar rd-navbar-corporate" data-layout="rd-navbar-fixed">
+      <div class="rd-navbar-aside-outer">
+        <div class="rd-navbar-aside">
+          <div class="rd-navbar-panel">
+            <button class="rd-navbar-toggle" data-rd-navbar-toggle=".rd-navbar-nav-wrap"><span></span></button>
+            <div class="rd-navbar-brand">
+              <a class="brand" href="index.html"><img src="images/logo-default-450x37.png" alt="Locaki Logo"></a>
+            </div>
+          </div>
+          <div class="rd-navbar-aside-right rd-navbar-collapse">
+            <a class="button button-md button-default-outline-2 button-ujarak" href="https://www.locaaqui.com.br/ProdutosCategoria.html?idCategoria=15&cidade=Jundiai" target="_blank">Faça sua Cotação</a>
+            <a class="button button-md button-default-outline-2 button-ujarak" href="https://wa.me/5511971537112?text=Olá%20eu%20estava%20no%20site%20e%20gostaria%20de%20mais%20informações%20sobre%20locação" target="_blank"><img src="images/whatF.png" alt="Whatsapp"/></a>
+          </div>
+        </div>
+      </div>
+      <div class="rd-navbar-main-outer">
+        <div class="rd-navbar-main">
+          <div class="rd-navbar-nav-wrap">
+            <ul class="list-inline list-inline-sm footer-social-list-2">
+              <li><a class="icon fa fa-facebook" href="https://www.facebook.com/Locaki"></a></li>
+              <li><a class="icon fa fa-google-plus" href="https://www.google.com/maps/dir//Locaki+-+Aluguel+de+festa+Jundiai"></a></li>
+              <li><a class="icon fa fa-instagram" href="https://www.instagram.com/locaki_locacao/"></a></li>
+            </ul>
+            <ul class="rd-navbar-nav">
+              <li class="rd-nav-item"><a class="rd-nav-link" href="index.html">Início</a></li>
+              <li class="rd-nav-item"><a class="rd-nav-link" href="porque_alugar.html">Por que Pq Alugar?</a></li>
+              <li class="rd-nav-item"><a class="rd-nav-link" href="souplat_para_casamento.html">Sousplat</a></li>
+              <li class="rd-nav-item"><a class="rd-nav-link" href="aluguelrdechaud.html">Rechaud</a></li>
+              <li class="rd-nav-item"><a class="rd-nav-link" href="produtos.html">Produtos</a></li>
+              <li class="rd-nav-item"><a class="rd-nav-link" href="localizacao.html">Localização</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <h1>Aluguel de Toalhas Longas para Mesa</h1>
+    <p>
+      Dê um toque de elegância e sofisticação ao seu evento! Alugue toalhas longas para mesa e transforme qualquer ambiente em um cenário de festa.<br>
+      <strong>Faça a Festa</strong> com quem entende de sonhos!
+    </p>
+    <img src="images/xxxxxxxxxx30.fw.png" alt="Toalha Longa para Mesa" width="518" height="307" style="max-width:340px; border-radius:18px; box-shadow:0 4px 24px #a259c622; animation: bounceIn 1.2s;">
+  </section>
+
+  <!-- Texto Persuasivo -->
+  <section class="container text-center" style="margin-top:32px;">
+    <h2 style="color:#a259c6; font-weight:700;">Locação de Toalhas Longas para Festas e Eventos</h2>
+    <p style="font-size:1.15rem; color:#444; max-width:700px; margin:0 auto;">
+      Na Locaki, você encontra toalhas longas para mesa em diversas cores e tamanhos, perfeitas para casamentos, aniversários, eventos corporativos e festas temáticas.<br>
+      <br>
+      <strong>Alugue toalhas longas</strong> e garanta praticidade, economia e um visual impecável para o seu evento. Nossa equipe cuida de tudo para você <b>FAÇA A FESTA</b> sem preocupação!
+    </p>
+  </section>
+
+  <!-- Produtos em Destaque -->
+  <section>
+    <div class="container">
+      <div class="product-listing">
+        <!-- Produto 1 -->
+        <div class="product-card" itemscope itemtype="https://schema.org/Product">
+          <img src="images/cta-1-368x420.fw.png" alt="Toalha Longa Branca" itemprop="image">
+          <h3 itemprop="name">Toalha Longa Branca</h3>
+          <p itemprop="description">Clássica e versátil, ideal para casamentos, formaturas e eventos sofisticados. Deixe sua mesa impecável!</p>
+          <a class="btn" href="https://www.locaaqui.com.br/adicionarProdutoCarrinho.html?idProduto=321" target="_blank" itemprop="url">Alugar Agora</a>
+        </div>
+        <!-- Produto 2 -->
+        <div class="product-card" itemscope itemtype="https://schema.org/Product">
+          <img src="images/cta-1-368x420.fw - Copia.png" alt="Toalha Longa Colorida" itemprop="image">
+          <h3 itemprop="name">Toalha Longa Colorida</h3>
+          <p itemprop="description">Disponível em várias cores para combinar com o tema da sua festa. Dê vida e alegria ao seu evento!</p>
+          <a class="btn" href="https://www.locaaqui.com.br/adicionarProdutoCarrinho.html?idProduto=322" target="_blank" itemprop="url">Alugar Agora</a>
+        </div>
+        <!-- Produto 3 -->
+        <div class="product-card" itemscope itemtype="https://schema.org/Product">
+          <img src="images/cta-1-368x420.fw - Copia (2).png" alt="Toalha Longa Rendada" itemprop="image">
+          <h3 itemprop="name">Toalha Longa Rendada</h3>
+          <p itemprop="description">Toque delicado e sofisticado para mesas de destaque. Perfeita para festas e cerimônias especiais.</p>
+          <a class="btn" href="https://www.locaaqui.com.br/adicionarProdutoCarrinho.html?idProduto=323" target="_blank" itemprop="url">Alugar Agora</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Chamada para ação e Localização -->
+  <section class="cta-section">
+    <h2>Solicite seu Orçamento e Faça a Festa!</h2>
+    <p>Entre em contato pelo WhatsApp ou venha nos visitar. Estamos prontos para ajudar a realizar o seu sonho!</p>
+    <a href="https://wa.me/5511971537112?text=Olá%20gostaria%20de%20informações%20sobre%20aluguel%20de%20toalhas%20longas%20para%20mesa" target="_blank" class="btn" style="background:#FF4CFF;"><i class="fa fa-whatsapp"></i> WhatsApp</a>
+    <a href="https://waze.com/ul?ll=-23.185,-46.897&navigate=yes" target="_blank" class="btn" style="background:#2d9bf0;"><i class="fa fa-location-arrow"></i> Waze</a>
+    <a href="https://goo.gl/maps/LocakiJundiai" target="_blank" class="btn" style="background:#ea4335;"><i class="fa fa-map-marker"></i> Google Maps</a>
+  </section>
+
+  <!-- WhatsApp Flutuante Animado -->
+  <a href="https://wa.me/5511971537112?text=Olá%20gostaria%20de%20informações%20sobre%20aluguel%20de%20toalhas%20longas%20para%20mesa" class="whatsapp-float" target="_blank" aria-label="WhatsApp">
+    <i class="fa fa-whatsapp"></i>
+  </a>
+
+  <!-- Footer -->
+  <footer class="section footer-corporate context-dark" style="margin-top:40px;">
+    <div class="footer-corporate-inset">
+      <div class="container">
+        <div class="row row-40 justify-content-lg-between">
+          <div class="col-sm-6 col-md-12 col-lg-3 col-xl-4">
+            <div>
+              <h6 class="text-spacing-100 text-uppercase">Contato</h6>
+              <ul class="footer-contacts d-inline-block d-sm-block">
+                <li><a href="mailto:contato@locaki.com.br">contato@locaki.com.br</a></li>
+                <li><a href="tel:+551143123456">(11) 4312-3456</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-5 col-lg-3 col-xl-4">
+            <h6 class="text-spacing-100 text-uppercase">Telefone</h6>
+            <ul class="footer-contacts d-inline-block d-sm-block">
+              <li><a href="tel:+5511971537112">(11) 97153-7112</a></li>
+            </ul>
+          </div>
+          <div class="col-sm-11 col-md-7 col-lg-5 col-xl-4">
+            <h6 class="text-spacing-100 text-uppercase">Nossas Empresas</h6>
+            <ul class="row-6 list-0 list-marked list-marked-md list-marked-secondary list-custom-2">
+              <li><a href="http://www.grupokifesta.com.br/" target="_blank">Grupo Ki-Festa</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer-corporate-bottom-panel">
+      <div class="container">
+        <div class="row justfy-content-xl-space-berween row-10 align-items-md-center2">
+          <div class="col-sm-6 col-md-4 text-sm-right text-md-center"></div>
+          <div class="col-sm-6 col-md-4 order-sm-first">
+            <p class="rights">&copy; <span class="copyright-year"></span> Locaki. Todos os direitos reservados - Grupo Ki-Festa <a href="https://www.grupokifesta.com.br">Ki-Festa</a></p>
+          </div>
+          <div class="col-sm-6 col-md-4 text-md-right">
+            <p class="rights"><a href="https://www.locaaqui.com.br/TermosDeUso.html">Termos de Uso</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="snackbars" id="form-output-global"></div>
+    <script src="Site2/js/core.min.js"></script>
+    <script src="Site2/js/script.js"></script>
+  </footer>
+</body>
+</html>

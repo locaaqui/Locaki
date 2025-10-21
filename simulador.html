@@ -1,0 +1,1779 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Simulador Toalhas × Mesas — Locaki</title>
+<style>
+  :root{--accent:#B200B2;--muted:#666;}
+  body{font-family:Arial, Helvetica, sans-serif; margin:0; padding:15px; background:#fff; font-size:13px; position: relative;}
+  
+  /* Marca d'água do logo */
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://locaki.com.br/images/logo-default-139x22.fw.png');
+    background-repeat: repeat;
+    background-size: 200px auto;
+    opacity: 0.03;
+    z-index: -1;
+    pointer-events: none;
+  }
+  
+  h1{color:var(--accent); font-size:18px; margin-bottom:4px; text-align:center;}
+  .wrap{max-width:1100px;margin:0 auto;}
+  .controls{width:250px; padding:15px;border:1px solid #eee;border-radius:8px; box-shadow:0 2px 12px #00000008;}
+  .canvas-box{flex:1; padding:15px; border:1px dashed #ddd; border-radius:8px; text-align:center; position: relative;}
+  label{display:block; margin:8px 0 4px; font-weight:700; font-size:12px;}
+  input[type="number"]{width:90px;padding:5px;border-radius:5px;border:1px solid #ccc; font-size:12px;}
+  .mesa-types{display:flex;gap:10px;margin-bottom:10px;}
+  .mesa-btn{flex:1;padding:6px;border-radius:6px;border:2px solid #eee;cursor:pointer;text-align:center;}
+  .mesa-btn.active{border-color:var(--accent);box-shadow:0 4px 12px #B200B222;}
+  .toalhas-list{max-height:calc(100vh - 250px);overflow:auto;padding-right:4px;}
+  .toalha-item{margin-bottom:8px; padding:5px; border-bottom:1px solid #f0f0f0;}
+  .btn-prim{display:inline-block;padding:6px 12px;background:var(--accent);color:#fff;border-radius:6px;border:none;cursor:pointer;margin-top:6px; font-size:12px;}
+  #simCanvas{background:#ffffff; border-radius:5px;}
+  .info{margin-top:8px;padding:8px;background:#f8f1fa;border-radius:6px;color:var(--accent);font-weight:700;}
+  .subinfo{color:var(--muted);font-size:11px;margin-top:4px; text-align:center;}
+  .dim-note{font-size:11px;color:#333;margin-top:6px; line-height:1.3;}
+  .small{font-size:11px;color:#444}
+  .legend{font-size:11px;color:#333;margin-top:4px}
+  .row{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+  
+  /* Cabeçalho centralizado */
+  .header-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .control-group {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .control-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+  
+  .control-item label {
+    margin: 0;
+    font-size: 12px;
+    font-weight: bold;
+  }
+  
+  .mesa-types-header {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 0;
+  }
+  
+  .mesa-types-header img {
+    width: 80px;
+    height: 80px;
+  }
+  
+  .dimensions-group {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-end;
+  }
+  
+  /* Diminuir fonte das toalhas */
+  .toalha-item label {
+    font-size: 11px;
+  }
+  
+  .toalha-item strong {
+    font-size: 11px;
+  }
+
+  /* Resumo lateral */
+  .resumo-container {
+    width: 250px;
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    box-shadow: 0 2px 12px #00000008;
+  }
+  
+  .resumo-title {
+    font-weight: bold;
+    color: #B200B2;
+    margin-bottom: 6px;
+    font-size: 12px;
+  }
+  
+  .resumo-content {
+    font-size: 10px;
+    color: #333;
+    line-height: 1.3;
+    white-space: pre-line;
+    max-height: 450px;
+    overflow: auto;
+  }
+
+  /* Container para botões gerar e reiniciar */
+  .buttons-container {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 12px;
+  }
+
+  /* Container para legenda */
+  .legend-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 8px;
+  }
+
+  /* Cores para valores positivos e negativos */
+  .positive {
+    color: #2E7D32;
+    font-weight: bold;
+  }
+  
+  .negative {
+    color: #C62828;
+    font-weight: bold;
+  }
+
+  .warning {
+    color: #FF9800;
+    font-weight: bold;
+  }
+
+  /* Layout principal */
+  .main-layout {
+    display: flex;
+    gap: 15px;
+    width: 100%;
+    align-items: flex-start;
+  }
+  
+  .toalhas-column {
+    flex: 0 0 250px;
+  }
+  
+  .simulador-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  /* Nova disposição: Canvas e Resumo lado a lado */
+  .canvas-resumo-container {
+    display: flex;
+    gap: 15px;
+    width: 100%;
+  }
+  
+  .canvas-wrapper {
+    flex: 1;
+  }
+  
+  .resumo-wrapper {
+    flex: 0 0 250px;
+  }
+
+  /* Checkbox Mostrar Medidas */
+  .show-measures-container {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: rgba(255,255,255,0.9);
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #eee;
+    z-index: 10;
+  }
+
+  .show-measures-container label {
+    font-size: 11px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+  }
+
+  /* Checkboxes múltiplos para toalhas */
+  .towel-checkboxes {
+    display: flex;
+    gap: 8px;
+    margin-top: 4px;
+    align-items: center;
+  }
+
+  .towel-checkbox-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .towel-checkbox-item input[type="checkbox"] {
+    margin: 0;
+    transform: scale(0.9);
+  }
+
+  .towel-checkbox-item label {
+    font-size: 9px;
+    margin: 0;
+    font-weight: normal;
+    color: #666;
+  }
+
+  .towel-name {
+    font-size: 11px;
+    font-weight: bold;
+    margin-bottom: 4px;
+  }
+
+  /* Layout para toalha com checkboxes ao lado */
+  .toalha-item-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .towel-name-container {
+    flex: 1;
+  }
+
+  .towel-checkboxes-container {
+    flex-shrink: 0;
+  }
+
+  /* Botão copiar */
+  .copy-button {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 10px;
+    margin-left: 8px;
+  }
+
+  .copy-button:hover {
+    background: #45a049;
+  }
+
+  .resumo-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  /* FOOTER STYLES - Igual ao index.html */
+  .section-40 {
+    padding-top: 40px;
+    padding-bottom: 40px;
+  }
+  
+  .section-md-top-75 {
+    padding-top: 75px;
+  }
+  
+  .section-md-bottom-60 {
+    padding-bottom: 60px;
+  }
+  
+  .bg-cod-gray {
+    background-color: #1a1a1a;
+  }
+  
+  .novi-background {
+    position: relative;
+  }
+  
+  .footer-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 15px;
+  }
+  
+  .footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 30px;
+  }
+  
+  .footer-section {
+    flex: 1;
+    min-width: 250px;
+  }
+  
+  .footer-section h3 {
+    color: #B200B2;
+    font-size: 16px;
+    margin-bottom: 15px;
+  }
+  
+  .footer-section p, .footer-section a {
+    font-size: 13px;
+    color: #ccc;
+    line-height: 1.6;
+    margin-bottom: 8px;
+    text-decoration: none;
+  }
+  
+  .footer-section a:hover {
+    color: #B200B2;
+  }
+  
+  .footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #333;
+    font-size: 12px;
+    color: #888;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .text-md-start {
+    text-align: left;
+  }
+  
+  .text-lg-center {
+    text-align: center;
+  }
+  
+  .row-30 {
+    margin-left: -15px;
+    margin-right: -15px;
+  }
+  
+  .align-items-md-center {
+    align-items: center;
+  }
+  
+  .justify-content-lg-center {
+    justify-content: center;
+  }
+  
+  .justify-content-xl-start {
+    justify-content: flex-start;
+  }
+  
+  .col-lg-11 {
+    flex: 0 0 91.666667%;
+    max-width: 91.666667%;
+  }
+  
+  .col-xl-3 {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+  
+  .col-md-7 {
+    flex: 0 0 58.333333%;
+    max-width: 58.333333%;
+  }
+  
+  .col-lg-6 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+  
+  .col-xl-5 {
+    flex: 0 0 41.666667%;
+    max-width: 41.666667%;
+  }
+  
+  .col-md-5 {
+    flex: 0 0 41.666667%;
+    max-width: 41.666667%;
+  }
+  
+  .col-xl-4 {
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%;
+  }
+  
+  .Bland img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .wrap-justify {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  
+  .contact-info {
+    margin-bottom: 15px;
+  }
+  
+  .unit {
+    display: flex;
+  }
+  
+  .unit-horizontal {
+    flex-direction: row;
+  }
+  
+  .unit-spacing-xs {
+    gap: 8px;
+  }
+  
+  .unit-left {
+    flex-shrink: 0;
+  }
+  
+  .unit-body {
+    flex-grow: 1;
+  }
+  
+  .fw-light {
+    font-weight: 300;
+  }
+  
+  .link-light-03 {
+    color: #ccc;
+    text-decoration: none;
+  }
+  
+  .link-light-03:hover {
+    color: #B200B2;
+  }
+  
+  .list-inline {
+    padding-left: 0;
+    list-style: none;
+  }
+  
+  .list-inline-xs {
+    margin-left: -5px;
+    margin-right: -5px;
+  }
+  
+  .list-inline-xs li {
+    display: inline-block;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  
+  .novi-icon {
+    display: inline-block;
+    font-style: normal;
+    line-height: 1;
+  }
+  
+  .icon-sm-custom {
+    font-size: 18px;
+  }
+  
+  .link-tundora {
+    color: #444;
+  }
+  
+  .link-tundora:hover {
+    color: #B200B2;
+  }
+  
+  .fa-facebook:before {
+    content: "f";
+    font-family: Arial;
+    font-weight: bold;
+  }
+  
+  .fa-linkedin:before {
+    content: "in";
+    font-family: Arial;
+    font-weight: bold;
+  }
+  
+  .fa-youtube:before {
+    content: "YT";
+    font-family: Arial;
+    font-weight: bold;
+  }
+
+  /* WhatsApp flutuante */
+  .whatsapp-float {
+    position: fixed;
+    width: 70px;
+    height: 70px;
+    bottom: 40px;
+    right: 40px;
+    background: linear-gradient(135deg, #FF4CFF 60%, #B200B2 100%);
+    color: #FFF;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 36px;
+    box-shadow: 0 0 18px 4px #FF4CFF80, 0 2px 8px #888;
+    z-index: 1000;
+    animation: pulse 1.5s infinite;
+    transition: transform 0.2s, background 0.3s;
+  }
+  
+  .whatsapp-float:hover {
+    background: linear-gradient(135deg, #25d366 60%, #128c7e 100%);
+    transform: scale(1.12) rotate(-3deg);
+    box-shadow: 0 0 28px 8px #25d366b0, 0 2px 12px #888;
+  }
+  
+  @keyframes pulse {
+    0% { box-shadow: 0 0 18px 4px #FF4CFF80, 0 2px 8px #888; }
+    50% { box-shadow: 0 0 32px 12px #FF4CFFb0, 0 2px 12px #888; }
+    100% { box-shadow: 0 0 18px 4px #FF4CFF80, 0 2px 8px #888; }
+  }
+
+  @media (max-width:900px){
+    body{padding:10px;}
+    .wrap{flex-direction:column}
+    .canvas-box{min-width:auto}
+    .header-controls {
+      padding: 8px;
+    }
+    .control-group {
+      flex-direction: column;
+      gap: 8px;
+    }
+    .dimensions-group {
+      flex-direction: column;
+      gap: 8px;
+      align-items: center;
+    }
+    .main-layout {
+      flex-direction: column;
+      gap: 10px;
+    }
+    .toalhas-column, .simulador-column {
+      width: 100%;
+    }
+    .canvas-resumo-container {
+      flex-direction: column;
+    }
+    .resumo-wrapper {
+      width: 100%;
+    }
+    .buttons-container {
+      flex-direction: column;
+      align-items: center;
+    }
+    .legend-container {
+      flex-direction: column;
+      gap: 8px;
+    }
+    .controls, .resumo-container {
+      width: auto;
+    }
+    .show-measures-container {
+      position: relative;
+      top: auto;
+      right: auto;
+      margin-bottom: 10px;
+    }
+    .towel-checkboxes {
+      gap: 6px;
+    }
+    .toalha-item-content {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 5px;
+    }
+    .resumo-header {
+      flex-direction: column;
+      gap: 8px;
+      align-items: flex-start;
+    }
+    
+    .footer-content {
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .text-md-start {
+      text-align: center;
+    }
+    
+    .col-md-7, .col-md-5, .col-lg-11, .col-xl-3, .col-lg-6, .col-xl-5, .col-xl-4 {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+  }
+</style>
+</head>
+<body>
+  <h1>Simulador de Tamanho <br>
+  Toalhas × Mesas — Locaki</h1>
+  <p class="subinfo">Selecione o tipo de mesa, informe medidas (em cm), escolha toalhas e arraste-as sobre a mesa</p>
+
+  <table align="center">
+    <tr>
+      <td><div class="header-controls">
+          <div class="control-group">
+            <div class="control-item">
+              <label>Tipo de mesa</label>
+              <div class="mesa-types-header"><br>
+                <div id="btnRect" class="mesa-btn active"><img src="images/z624.png"></div>
+                <div id="btnRound" class="mesa-btn"><img src="images/33.png"></div>
+              </div>
+            </div>
+          </div>
+      </td>
+      <td>
+          <div class="dimensions-group" id="dimensionsGroup">
+            <!-- Dimensões para mesa retangular -->
+            <div class="control-item">
+              <label>Comprimento (cm)</label>
+              <input id="inpCompr" type="number" min="10" value="120">
+            </div>
+            
+            <div class="control-item">
+              <label>Largura (cm)</label>
+              <input id="inpLarg" type="number" min="10" value="120">
+            </div>
+            
+            <div class="control-item">
+              <label>Altura (cm)</label>
+              <input id="inpAlt" type="number" min="10" value="78">
+            </div>
+            
+            <div class="buttons-container">
+              <button id="btnGenerate" class="btn-prim">Gerar desenho</button>
+              <button id="btnReset" class="btn-prim">Limpar</button>
+            </div>
+          </div>
+      </td>
+    </tr>  
+  </table>
+    
+  <div class="wrap">
+    <!-- Layout principal -->
+    <div class="main-layout">
+      <!-- Coluna 1: Toalhas disponíveis -->
+      <div class="toalhas-column">
+        <div class="controls" aria-label="Controles">
+          <label><h1>Tamanhos Disponíveis</h1></label>
+          <div class="toalhas-list" id="toalhasList" role="group" aria-label="Lista de toalhas">
+            <!-- List populated by JS -->
+          </div>
+
+          <div class="dim-note">
+            <strong>Observações:</strong><br>
+            - Arraste a toalha com o mouse sobre a mesa<br>
+            - Selecione até 3 unidades da mesma toalha<br>
+            - Cada unidade pode ser movida independentemente
+          </div>
+        </div>
+      </div>
+      
+      <!-- Coluna 2: Canvas e Resumo lado a lado -->
+      <div class="simulador-column">
+        <div class="canvas-resumo-container">
+          <div class="canvas-wrapper">
+            <div class="canvas-box">
+              <!-- Checkbox Mostrar Medidas -->
+              <div class="show-measures-container">
+                <label>
+                  <input type="checkbox" id="showMeasures" checked>
+                  Mostrar Medidas
+                </label>
+              </div>
+              
+              <canvas id="simCanvas" width="500" height="400" aria-label="Área de simulação"></canvas>
+              <div class="legend-container">
+                <div class="legend">Arraste as toalhas para ajustar posição</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="resumo-wrapper">
+            <div class="resumo-container">
+              <div class="resumo-header">
+                <div class="resumo-title" id="resumoTitle">Nenhuma simulação ainda</div>
+                <button class="copy-button" id="copyButton">Copiar Resumo</button>
+              </div>
+              <div class="resumo-content" id="resumoContent">Gere a mesa e selecione uma toalha para ver o resumo.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <footer class="page-foot page-foot-default section-35 bg-black novi-background text-center">  
+    <div class="container">
+      <p class="rights small">
+        <span>Locaki</span><span>&nbsp;&#169;&nbsp;</span>
+        <span class="copyright-year">2023</span>
+        <span>Todos direitos reservados.</span>
+        <br class="d-md-none">
+        <span>Designed by <a class="link-primary" href="https://locaaqui.com.br/">Locaaqui.com.br.</a></span>
+      </p>
+    </div>
+  </footer>
+
+  <!-- WhatsApp flutuante -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <a href="https://wa.me/5511971537112?text=Olá%20eu%20estava%20no%20simulador%20de%20toalhas%20e%20gostaria%20de%20alugar%20itens%20para%20minha%20festa" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Fale conosco pelo WhatsApp">
+    <i style="margin-top:18px" class="fa fa-whatsapp"></i>
+  </a>
+
+<!-- O código JavaScript permanece EXATAMENTE IGUAL -->
+<script>
+/* ------------- CONFIG & DATA ------------- */
+const towels = [
+  {name: "Toalha Quadra 100 x 100 cm", w: 100, h: 100, shape:'rect', roundedCorners: false},
+  {name: "Toalha Quadra 140 x 140 cm", w: 140, h: 140, shape:'rect', roundedCorners: false},
+  {name: "Toalha Quadra 150 x 150 cm", w: 150, h: 150, shape:'rect', roundedCorners: false},
+  {name: "Toalha Quadra 210 x 210 cm", w: 210, h: 210, shape:'rect', roundedCorners: false},
+  {name: "Toalha Retangular 260 x 230 cm", w: 260, h: 230, shape:'rect', roundedCorners: true, cornerRadius: 28.6},
+  {name: "Toalha Retangular 395 x 220 cm", w: 395, h: 220, shape:'rect', roundedCorners: true, cornerRadius: 24.2},
+  {name: "Toalha Retangular 350 x 140 cm", w: 350, h: 140, shape:'rect', roundedCorners: false},
+  {name: "Toalha Retangular 500 x 140 cm", w: 500, h: 140, shape:'rect', roundedCorners: false},
+  {name: "Toalha Redonda 230 cm", w: 230, h: 230, shape:'circle'},
+  {name: "Toalha Redonda 280 cm", w: 280, h: 280, shape:'circle'},
+  {name: "Toalha Redonda 310 cm", w: 310, h: 310, shape:'circle'},
+];
+
+let mesaTipo = 'rect';
+let mesa = {};
+let selectedTowels = [];
+let scale = 1;
+const margin = 30;
+const canvas = document.getElementById('simCanvas');
+const ctx = canvas.getContext('2d');
+const btnRect = document.getElementById('btnRect');
+const btnRound = document.getElementById('btnRound');
+const btnGenerate = document.getElementById('btnGenerate');
+const btnReset = document.getElementById('btnReset');
+const toalhasList = document.getElementById('toalhasList');
+let resumoTitle = document.getElementById('resumoTitle');
+let resumoContent = document.getElementById('resumoContent');
+const dimensionsGroup = document.getElementById('dimensionsGroup');
+const showMeasuresCheckbox = document.getElementById('showMeasures');
+const copyButton = document.getElementById('copyButton');
+
+let towelStates = [];
+let towelCounter = 0;
+
+/* ----------------- UI init ----------------- */
+function buildToalhasList(){
+  towels.forEach((t,i)=>{
+    const towelItem = document.createElement('div');
+    towelItem.className = 'toalha-item';
+    
+    towelItem.innerHTML = `
+      <div class="toalha-item-content">
+        <div class="towel-name-container">
+          <div class="towel-name">${t.name}${t.roundedCorners ? ' (bicos arredondados)' : ''}</div>
+        </div>
+        <div class="towel-checkboxes-container">
+          <div class="towel-checkboxes">
+            <div class="towel-checkbox-item">
+              <input type="checkbox" id="towel${i}_1" name="towel${i}" value="${i}">
+              <label for="towel${i}_1">1</label>
+            </div>
+            <div class="towel-checkbox-item">
+              <input type="checkbox" id="towel${i}_2" name="towel${i}" value="${i}">
+              <label for="towel${i}_2">2</label>
+            </div>
+            <div class="towel-checkbox-item">
+              <input type="checkbox" id="towel${i}_3" name="towel${i}" value="${i}">
+              <label for="towel${i}_3">3</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    
+    toalhasList.appendChild(towelItem);
+    
+    const checkboxes = towelItem.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach((checkbox, checkboxIndex) => {
+      checkbox.addEventListener('change', (e) => {
+        const towelIndex = i;
+        const instanceNumber = checkboxIndex + 1;
+        
+        if(e.target.checked) {
+          const newTowelState = {
+            towel: {...towels[towelIndex]},
+            x: 0,
+            y: 0,
+            dragging: false,
+            offsetX: 0,
+            offsetY: 0,
+            id: towelCounter++,
+            instanceNumber: instanceNumber
+          };
+          towelStates.push(newTowelState);
+        } else {
+          towelStates = towelStates.filter(state => 
+            !(state.towel.name === towels[towelIndex].name && state.instanceNumber === instanceNumber)
+          );
+        }
+        
+        drawAll();
+        updateResumoRapido();
+      });
+    });
+  });
+}
+buildToalhasList();
+
+/* mesa type buttons */
+btnRect.addEventListener('click', ()=>{
+  mesaTipo='rect'; 
+  btnRect.classList.add('active'); 
+  btnRound.classList.remove('active'); 
+  updateDimensionsUI();
+});
+btnRound.addEventListener('click', ()=>{
+  mesaTipo='circle'; 
+  btnRound.classList.add('active'); 
+  btnRect.classList.remove('active'); 
+  updateDimensionsUI();
+});
+
+/* Update dimensions UI based on table type */
+function updateDimensionsUI() {
+  if (mesaTipo === 'rect') {
+    dimensionsGroup.innerHTML = `
+      <div class="control-item">
+        <label>Comprimento (cm)</label>
+        <input id="inpCompr" type="number" min="10" value="120">
+      </div>
+      
+      <div class="control-item">
+        <label>Largura (cm)</label>
+        <input id="inpLarg" type="number" min="10" value="120">
+      </div>
+      
+      <div class="control-item">
+        <label>Altura (cm)</label>
+        <input id="inpAlt" type="number" min="10" value="78">
+      </div>
+      
+      <div class="buttons-container">
+        <button id="btnGenerate" class="btn-prim">Gerar desenho</button>
+        <button id="btnReset" class="btn-prim">Limpar</button>
+      </div>
+    `;
+    
+    document.getElementById('btnGenerate').addEventListener('click', generateDrawing);
+    document.getElementById('btnReset').addEventListener('click', resetAll);
+  } else {
+    dimensionsGroup.innerHTML = `
+      <div class="control-item">
+        <label>Diâmetro (cm)</label>
+        <input id="inpDiam" type="number" min="10" value="120">
+      </div>
+      
+      <div class="control-item">
+        <label>Altura (cm)</label>
+        <input id="inpAlt" type="number" min="10" value="78">
+      </div>
+      
+      <div class="buttons-container">
+        <button id="btnGenerate" class="btn-prim">Gerar desenho</button>
+        <button id="btnReset" class="btn-prim">Limpar</button>
+      </div>
+    `;
+    
+    document.getElementById('btnGenerate').addEventListener('click', generateDrawing);
+    document.getElementById('btnReset').addEventListener('click', resetAll);
+  }
+}
+
+/* generate */
+function generateDrawing() {
+  if(!mesaTipo){ alert('Selecione o tipo da mesa.'); return; }
+  if(mesaTipo==='rect'){
+    const compr = Number(document.getElementById('inpCompr').value)||0;
+    const larg = Number(document.getElementById('inpLarg').value)||0;
+    const alt = Number(document.getElementById('inpAlt').value)||0;
+    if(compr<=0||larg<=0){ alert('Informe comprimento e largura válidos.'); return; }
+    mesa = {comprimento:compr, largura:larg, altura:alt};
+  } else {
+    const diam = Number(document.getElementById('inpDiam').value)||0;
+    const alt = Number(document.getElementById('inpAlt').value)||0;
+    if(diam<=0){ alert('Informe diâmetro válido.'); return; }
+    mesa = {diametro:diam, altura:alt};
+  }
+  towelStates.forEach(state => {
+    state.x = 0;
+    state.y = 0;
+  });
+  computeScaleAndDraw();
+}
+
+btnGenerate.addEventListener('click', generateDrawing);
+
+/* reset function */
+function resetAll() {
+  towelStates = [];
+  towelCounter = 0;
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  checkboxes.forEach(checkbox => {
+    checkbox.checked = false;
+  });
+  
+  if (mesaTipo === 'rect') {
+    document.getElementById('inpCompr').value = '120';
+    document.getElementById('inpLarg').value = '120';
+    document.getElementById('inpAlt').value = '78';
+  } else {
+    document.getElementById('inpDiam').value = '120';
+    document.getElementById('inpAlt').value = '78';
+  }
+  
+  mesa = {};
+  drawAll();
+  updateResumoRapido();
+}
+
+btnReset.addEventListener('click', resetAll);
+
+/* compute best scale so everything fits */
+function computeScaleAndDraw(){
+  let maxWidthCm=0, maxHeightCm=0;
+  
+  if(mesaTipo==='rect'){
+    const w = mesa.comprimento;
+    const h = mesa.largura;
+    const alt = mesa.altura;
+    maxWidthCm = w + alt * 2;
+    maxHeightCm = h + alt * 2;
+  } else {
+    const d = mesa.diametro;
+    const alt = mesa.altura;
+    maxWidthCm = d + alt * Math.sqrt(2);
+    maxHeightCm = d + alt * Math.sqrt(2);
+  }
+  
+  towelStates.forEach(state => {
+    const t = state.towel;
+    maxWidthCm = Math.max(maxWidthCm, t.w);
+    maxHeightCm = Math.max(maxHeightCm, t.h);
+  });
+  
+  maxWidthCm *= 1.1;
+  maxHeightCm *= 1.1;
+
+  const availW = canvas.width - margin*2;
+  const availH = canvas.height - margin*2;
+  const scaleX = availW / maxWidthCm;
+  const scaleY = availH / maxHeightCm;
+  
+  scale = Math.min(scaleX, scaleY);
+  
+  if(scale <= 0) scale = 1;
+
+  drawAll();
+  updateResumoRapido();
+}
+
+/* ------------- DRAWING ------------- */
+function clear(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle = '#fff'; ctx.fillRect(0,0,canvas.width,canvas.height);
+}
+
+function toPx(x_cm, y_cm){
+  const cx = canvas.width/2, cy = canvas.height/2;
+  return {x: cx + x_cm*scale, y: cy + y_cm*scale};
+}
+
+function drawTable(){
+  ctx.save();
+  ctx.strokeStyle = '#000';
+  ctx.lineWidth = 6;
+  ctx.fillStyle = '#000'; ctx.globalAlpha = 0.9;
+  ctx.globalAlpha = 1;
+  ctx.strokeStyle = '#000';
+  ctx.lineWidth = 8;
+  if(mesaTipo==='rect'){
+    const w = mesa.comprimento, h = mesa.largura;
+    const p1 = toPx(-w/2, -h/2);
+    ctx.beginPath();
+    ctx.rect(p1.x, p1.y, w*scale, h*scale);
+    ctx.stroke();
+    
+    if(showMeasuresCheckbox.checked){
+      ctx.save();
+      ctx.font = '10px Arial';
+      ctx.fillStyle = '#666';
+      
+      ctx.textAlign = 'left';
+      ctx.fillText(`← ${w}cm C →`, p1.x + 25, p1.y + 18);
+      
+      ctx.save();
+      ctx.translate(p1.x + 5, p1.y + h*scale/2);
+      ctx.rotate(-Math.PI/2);
+      ctx.textAlign = 'center';
+      ctx.fillText(`← ${h}cm A  →`, 0, 15);
+      ctx.restore();
+      
+      ctx.restore();
+    }
+  } else {
+    const d = mesa.diametro;
+    const c = toPx(0,0);
+    ctx.beginPath();
+    ctx.arc(c.x, c.y, d/2*scale, 0, Math.PI*2);
+    ctx.stroke();
+    
+    if(showMeasuresCheckbox.checked){
+      ctx.save();
+      ctx.font = '10px Arial';
+      ctx.fillStyle = '#666';
+      ctx.textAlign = 'center';
+      ctx.fillText(`←${d}cm Circunferência→`, c.x, c.y);
+      ctx.restore();
+    }
+  }
+  ctx.restore();
+}
+
+function drawHeightLines(){
+  ctx.save();
+  ctx.strokeStyle = '#666';
+  ctx.lineWidth = 2;
+  ctx.setLineDash([5, 3]);
+  
+  const alt = mesa.altura;
+  
+  if(mesaTipo==='rect'){
+    const w = mesa.comprimento, h = mesa.largura;
+    
+    const verticalPoints = [
+      {x: -w/2, y: 0, angle: 180, textOffsetX: -15, textOffsetY: 0},
+      {x: w/2, y: 0, angle: 0, textOffsetX: 15, textOffsetY: 0},
+      {x: 0, y: -h/2, angle: 270, textOffsetX: 0, textOffsetY: -15},
+      {x: 0, y: h/2, angle: 90, textOffsetX: 0, textOffsetY: 15}
+    ];
+    
+    const diagonalPoints = [
+      {x: -w/2, y: -h/2, angle: 225, textOffsetX: -10, textOffsetY: -10},
+      {x: w/2, y: -h/2, angle: 315, textOffsetX: 10, textOffsetY: -10},
+      {x: -w/2, y: h/2, angle: 135, textOffsetX: -10, textOffsetY: 10},
+      {x: w/2, y: h/2, angle: 45, textOffsetX: 10, textOffsetY: 10}
+    ];
+    
+    verticalPoints.forEach(point => {
+      const start = toPx(point.x, point.y);
+      const angleRad = point.angle * Math.PI / 180;
+      const endX = point.x + Math.cos(angleRad) * alt;
+      const endY = point.y + Math.sin(angleRad) * alt;
+      const end = toPx(endX, endY);
+      
+      ctx.beginPath();
+      ctx.moveTo(start.x, start.y);
+      ctx.lineTo(end.x, end.y);
+      ctx.stroke();
+      
+      if(showMeasuresCheckbox.checked){
+        ctx.save();
+        ctx.font = '9px Arial';
+        ctx.fillStyle = '#666';
+        
+        const midX = (start.x + end.x) / 2;
+        const midY = (start.y + end.y) / 2;
+        
+        const textAngle = Math.atan2(end.y - start.y, end.x - start.x);
+        ctx.save();
+        ctx.translate(midX + point.textOffsetX, midY + point.textOffsetY);
+        ctx.rotate(textAngle);
+        ctx.textAlign = 'center';
+        ctx.fillText(`←${alt}cm Altura→`, -10, 20);
+        ctx.restore();
+      }
+      
+      const perpAngle = angleRad + Math.PI/2;
+      ctx.beginPath();
+      ctx.moveTo(end.x - Math.cos(perpAngle)*3, end.y - Math.sin(perpAngle)*3);
+      ctx.lineTo(end.x + Math.cos(perpAngle)*3, end.y + Math.sin(perpAngle)*3);
+      ctx.stroke();
+      
+      ctx.restore();
+    });
+    
+    diagonalPoints.forEach(point => {
+      const start = toPx(point.x, point.y);
+      const angleRad = point.angle * Math.PI / 180;
+      const endX = point.x + Math.cos(angleRad) * alt;
+      const endY = point.y + Math.sin(angleRad) * alt;
+      const end = toPx(endX, endY);
+      
+      ctx.beginPath();
+      ctx.moveTo(start.x, start.y);
+      ctx.lineTo(end.x, end.y);
+      ctx.stroke();
+      
+      if(showMeasuresCheckbox.checked){
+        ctx.save();
+        ctx.font = '9px Arial';
+        ctx.fillStyle = '#666';
+        
+        const midX = (start.x + end.x) / 2;
+        const midY = (start.y + end.y) / 2;
+        
+        const textAngle = Math.atan2(end.y - start.y, end.x - start.x);
+        ctx.save();
+        ctx.translate(midX + point.textOffsetX, midY + point.textOffsetY);
+        ctx.rotate(textAngle);
+        ctx.textAlign = 'center';
+        ctx.fillText(`←${alt}cm Altura→`, -10, 20);
+        ctx.restore();
+      }
+      
+      const perpAngle = angleRad + Math.PI/2;
+      ctx.beginPath();
+      ctx.moveTo(end.x - Math.cos(perpAngle)*3, end.y - Math.sin(perpAngle)*3);
+      ctx.lineTo(end.x + Math.cos(perpAngle)*3, end.y + Math.sin(perpAngle)*3);
+      ctx.stroke();
+      
+      ctx.restore();
+    });
+  } else {
+    const d = mesa.diametro;
+    const angles = [
+      {angle: 0, textOffsetX: 0, textOffsetY: -15},
+      {angle: 45, textOffsetX: 10, textOffsetY: -10},
+      {angle: 90, textOffsetX: 15, textOffsetY: 0},
+      {angle: 135, textOffsetX: 10, textOffsetY: 10},
+      {angle: 180, textOffsetX: 0, textOffsetY: 15},
+      {angle: 225, textOffsetX: -10, textOffsetY: 10},
+      {angle: 270, textOffsetX: -15, textOffsetY: 0},
+      {angle: 315, textOffsetX: -10, textOffsetY: -10}
+    ];
+    
+    angles.forEach(item => {
+      const angleRad = item.angle * Math.PI / 180;
+      const x = Math.cos(angleRad) * (d/2);
+      const y = Math.sin(angleRad) * (d/2);
+      
+      const start = toPx(x, y);
+      const endX = x + Math.cos(angleRad) * alt;
+      const endY = y + Math.sin(angleRad) * alt;
+      const end = toPx(endX, endY);
+      
+      ctx.beginPath();
+      ctx.moveTo(start.x, start.y);
+      ctx.lineTo(end.x, end.y);
+      ctx.stroke();
+      
+      if(showMeasuresCheckbox.checked){
+        ctx.save();
+        ctx.font = '9px Arial';
+        ctx.fillStyle = '#666';
+        
+        const midX = (start.x + end.x) / 2;
+        const midY = (start.y + end.y) / 2;
+        
+        const textAngle = Math.atan2(end.y - start.y, end.x - start.x);
+        ctx.save();
+        ctx.translate(midX + item.textOffsetX, midY + item.textOffsetY);
+        ctx.rotate(textAngle);
+        ctx.textAlign = 'center';
+        ctx.fillText(`←${alt}cm Altura→`, 0, 30);
+        ctx.restore();
+      }
+      
+      const perpAngle = angleRad + Math.PI/2;
+      ctx.beginPath();
+      ctx.moveTo(end.x - Math.cos(perpAngle)*3, end.y - Math.sin(perpAngle)*3);
+      ctx.lineTo(end.x + Math.cos(perpAngle)*3, end.y + Math.sin(perpAngle)*3);
+      ctx.stroke();
+      
+      ctx.restore();
+    });
+  }
+  
+  ctx.restore();
+}
+
+function drawTowel(state, index){
+  const t = state.towel;
+  const center = toPx(state.x, state.y);
+  ctx.save();
+  ctx.globalAlpha = 0.55;
+  const color = colorFromIndex(index);
+  ctx.fillStyle = color+'80';
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 2;
+  
+  if(state.instanceNumber > 1) {
+    ctx.save();
+    ctx.font = '12px Arial';
+    ctx.fillStyle = color;
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.globalAlpha = 1;
+    ctx.fillText(state.instanceNumber, center.x, center.y);
+    ctx.restore();
+  }
+  
+  if(t.shape === 'circle'){
+    const r = (t.w/2)*scale;
+    ctx.beginPath();
+    ctx.arc(center.x, center.y, r, 0, Math.PI*2);
+    ctx.fill();
+    ctx.stroke();
+  } else {
+    const wpx = t.w*scale;
+    const hpx = t.h*scale;
+    
+    if(t.roundedCorners){
+      const cornerRadius = (t.cornerRadius || 10) * scale;
+      const x = center.x - wpx/2;
+      const y = center.y - hpx/2;
+      
+      ctx.beginPath();
+      ctx.moveTo(x + cornerRadius, y);
+      ctx.lineTo(x + wpx - cornerRadius, y);
+      ctx.arcTo(x + wpx, y, x + wpx, y + cornerRadius, cornerRadius);
+      ctx.lineTo(x + wpx, y + hpx - cornerRadius);
+      ctx.arcTo(x + wpx, y + hpx, x + wpx - cornerRadius, y + hpx, cornerRadius);
+      ctx.lineTo(x + cornerRadius, y + hpx);
+      ctx.arcTo(x, y + hpx, x, y + hpx - cornerRadius, cornerRadius);
+      ctx.lineTo(x, y + cornerRadius);
+      ctx.arcTo(x, y, x + cornerRadius, y, cornerRadius);
+      ctx.closePath();
+    } else {
+      ctx.beginPath();
+      ctx.rect(center.x - wpx/2, center.y - hpx/2, wpx, hpx);
+    }
+    
+    ctx.fill();
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
+function colorFromIndex(index){
+  const colors = [
+    '#FF5252', '#FF9800', '#FFEB3B', '#4CAF50', 
+    '#2196F3', '#9C27B0', '#E91E63', '#00BCD4',
+    '#8BC34A', '#FFC107', '#795548', '#607D8B'
+  ];
+  return colors[index % colors.length];
+}
+
+function drawAll(){
+  clear();
+  if(!mesaTipo || (mesaTipo==='rect' && !mesa.comprimento) || (mesaTipo==='circle' && !mesa.diametro)){
+    ctx.font='14px Arial'; ctx.fillStyle='#444'; ctx.textAlign='center';
+    ctx.fillText('Defina mesa e medidas, depois clique em "Gerar desenho".', canvas.width/2, canvas.height/2);
+    return;
+  }
+  drawHeightLines();
+  drawTable();
+  towelStates.forEach((state, index) => {
+    drawTowel(state, index);
+  });
+}
+
+/* ----------------- INTERACTION: drag towel ----------------- */
+let isMouseDown = false;
+let dragStart = null;
+let draggedTowelIndex = -1;
+
+function getMousePos(evt){
+  const rect = canvas.getBoundingClientRect();
+  return {x: evt.clientX - rect.left, y: evt.clientY - rect.top};
+}
+
+function getTowelUnderMouse(mx, my){
+  for(let i = towelStates.length - 1; i >= 0; i--) {
+    const state = towelStates[i];
+    const t = state.towel;
+    const center = toPx(state.x, state.y);
+    
+    if(t.shape === 'circle'){
+      const r = (t.w/2)*scale;
+      const dx = mx - center.x, dy = my - center.y;
+      if(dx*dx + dy*dy <= r*r) return i;
+    } else {
+      const wpx = t.w*scale, hpx = t.h*scale;
+      if(mx >= center.x - wpx/2 && mx <= center.x + wpx/2 && 
+         my >= center.y - hpx/2 && my <= center.y + hpx/2) return i;
+    }
+  }
+  return -1;
+}
+
+canvas.addEventListener('mousedown', (e)=>{
+  const m = getMousePos(e);
+  const towelIndex = getTowelUnderMouse(m.x, m.y);
+  
+  if(towelIndex >= 0){
+    isMouseDown = true;
+    draggedTowelIndex = towelIndex;
+    dragStart = m;
+    const state = towelStates[towelIndex];
+    const center = toPx(state.x, state.y);
+    state.offsetX = m.x - center.x;
+    state.offsetY = m.y - center.y;
+    state.dragging = true;
+    canvas.style.cursor = 'grabbing';
+  }
+});
+
+window.addEventListener('mousemove', (e)=>{
+  if(!isMouseDown || draggedTowelIndex < 0) return;
+  
+  const m = getMousePos(e);
+  const state = towelStates[draggedTowelIndex];
+  
+  const px = m.x - state.offsetX;
+  const py = m.y - state.offsetY;
+  
+  const cx = canvas.width/2, cy = canvas.height/2;
+  const x_cm = (px - cx)/scale;
+  const y_cm = (py - cy)/scale;
+  
+  state.x = x_cm;
+  state.y = y_cm;
+  
+  drawAll();
+  updateResumoRapido();
+});
+
+window.addEventListener('mouseup', (e)=>{
+  if(isMouseDown && draggedTowelIndex >= 0){
+    towelStates[draggedTowelIndex].dragging = false;
+  }
+  isMouseDown = false;
+  draggedTowelIndex = -1;
+  canvas.style.cursor = 'default';
+});
+
+canvas.addEventListener('dblclick', (e)=>{
+  towelStates.forEach(state => {
+    state.x = 0;
+    state.y = 0;
+  });
+  drawAll();
+  updateResumoRapido();
+});
+
+/* ----------------- RESUMO RÁPIDO ----------------- */
+function updateResumoRapido(){
+  if(!mesaTipo || (mesaTipo==='rect' && (!mesa.comprimento || !mesa.largura)) || (mesaTipo==='circle' && !mesa.diametro)) {
+    resumoTitle.innerText = 'Nenhuma simulação ainda';
+    resumoContent.innerHTML = 'Gere a mesa e selecione uma toalha para ver o resumo.';
+    return;
+  }
+  
+  let title = '';
+  let content = '';
+  
+  if(mesaTipo==='rect'){
+    const tLeft = -mesa.comprimento/2, tRight = mesa.comprimento/2;
+    const tTop = -mesa.largura/2, tBottom = mesa.largura/2;
+    
+    title = `Resumo — ${towelStates.length} toalha(s) selecionada(s)`;
+    content = `Mesa retangular: ${mesa.comprimento} cm (comprimento) × ${mesa.largura} cm (largura) × ${mesa.altura} cm (altura)\n\n`;
+    
+    if(towelStates.length === 0) {
+      content += 'Nenhuma toalha selecionada. Selecione uma toalha para ver a análise.';
+    } else {
+      towelStates.forEach((state, index) => {
+        const t = state.towel;
+        const color = colorFromIndex(index);
+        
+        const instanceText = state.instanceNumber > 1 ? ` (Unidade ${state.instanceNumber})` : '';
+        
+        content += `<span style="color:${color}">● ${t.name}${instanceText}</span>\n`;
+        
+        if(t.shape === 'circle'){
+          // TOALHA REDONDA EM MESA RETANGULAR - CÁLCULO CORRETO
+          const towelRadius = t.w/2;
+          const tableHalfWidth = mesa.comprimento/2;
+          const tableHalfLength = mesa.largura/2;
+          
+          // Calcular distância do centro da toalha aos cantos da mesa
+          const corners = [
+            {x: -tableHalfWidth, y: -tableHalfLength, name: "canto superior esquerdo"},
+            {x: tableHalfWidth, y: -tableHalfLength, name: "canto superior direito"},
+            {x: -tableHalfWidth, y: tableHalfLength, name: "canto inferior esquerdo"},
+            {x: tableHalfWidth, y: tableHalfLength, name: "canto inferior direito"}
+          ];
+          
+          let maxCaimento = 0;
+          let minCaimento = Infinity;
+          const cornerResults = [];
+          
+          corners.forEach(corner => {
+            const distToCorner = Math.sqrt((state.x - corner.x)**2 + (state.y - corner.y)**2);
+            const caimento = Math.max(0, towelRadius - distToCorner);
+            
+            cornerResults.push({
+              name: corner.name,
+              caimento: caimento,
+              faltaChao: Math.max(0, mesa.altura - caimento)
+            });
+            
+            maxCaimento = Math.max(maxCaimento, caimento);
+            minCaimento = Math.min(minCaimento, caimento);
+          });
+          
+          const faltaChaoTotal = Math.max(0, mesa.altura - maxCaimento);
+          
+          // Cálculos detalhados solicitados
+          const comprimentoComAltura = mesa.comprimento + 2 * mesa.altura;
+          const larguraComAltura = mesa.largura + 2 * mesa.altura;
+          const diagonalMesa = Math.sqrt(mesa.comprimento**2 + mesa.largura**2);
+          const diagonalComAltura = diagonalMesa + 2 * mesa.altura;
+          
+          const faltaComprimento = Math.max(0, comprimentoComAltura - t.w);
+          const faltaLargura = Math.max(0, larguraComAltura - t.w);
+          const faltaDiagonal = Math.max(0, diagonalComAltura - t.w);
+          
+          const arrastaComprimento = Math.max(0, t.w - comprimentoComAltura);
+          const arrastaLargura = Math.max(0, t.w - larguraComAltura);
+          const arrastaDiagonal = Math.max(0, t.w - diagonalComAltura);
+          
+          // Verificar se a toalha é adequada (não arrasta no chão em nenhuma dimensão)
+          const toalhaAdequada = (arrastaComprimento <= 0) && (arrastaLargura <= 0) && (arrastaDiagonal <= 0);
+          
+          // Resultado geral
+          const circleText = () => {
+            if(minCaimento > 0) {
+              return `<span class="negative">Faltam ${Math.round(minCaimento)} cm para cobrir os cantos da mesa (faltam ${Math.round(faltaChaoTotal)} cm para chegar ao chão).</span>`;
+            }
+            if(maxCaimento > 0) {
+              if(faltaChaoTotal <= 0) {
+                const sobra = Math.abs(faltaChaoTotal);
+                return sobra > 0 ? 
+                  `<span class="positive">Cai ${Math.round(maxCaimento)} cm (encosta no chão com sobra de ${Math.round(sobra)} cm).</span>` :
+                  `<span class="positive">Cai ${Math.round(maxCaimento)} cm (encosta no chão - justo).</span>`;
+              }
+              return `<span class="warning">Cai ${Math.round(maxCaimento)} cm (faltam ${Math.round(faltaChaoTotal)} cm para chegar ao chão).</span>`;
+            }
+            return `<span class="positive">Cobre exatamente os cantos da mesa.</span>`;
+          };
+
+          content += `  ${circleText()}\n\n`;
+          
+          // Cálculos detalhados
+          content += `  Cálculos detalhados:\n`;
+          content += `  - Comprimento + 2×Altura: ${mesa.comprimento} + 2×${mesa.altura} = ${comprimentoComAltura} cm\n`;
+          if(faltaComprimento > 0) {
+            content += `    <span class="negative">Faltam ${Math.round(faltaComprimento)} cm para cobrir o comprimento</span>\n`;
+          } else {
+            content += `    <span class="${arrastaComprimento > 0 ? 'negative' : 'positive'}">${arrastaComprimento > 0 ? 'Arrasta ' + Math.round(arrastaComprimento) + ' cm no chão' : 'Cobre perfeitamente'} no comprimento</span>\n`;
+          }
+          
+          content += `  - Largura + 2×Altura: ${mesa.largura} + 2×${mesa.altura} = ${larguraComAltura} cm\n`;
+          if(faltaLargura > 0) {
+            content += `    <span class="negative">Faltam ${Math.round(faltaLargura)} cm para cobrir a largura</span>\n`;
+          } else {
+            content += `    <span class="${arrastaLargura > 0 ? 'negative' : 'positive'}">${arrastaLargura > 0 ? 'Arrasta ' + Math.round(arrastaLargura) + ' cm no chão' : 'Cobre perfeitamente'} na largura</span>\n`;
+          }
+          
+          content += `  - Diagonal + 2×Altura: ${Math.round(diagonalMesa)} + 2×${mesa.altura} = ${Math.round(diagonalComAltura)} cm\n`;
+          if(faltaDiagonal > 0) {
+            content += `    <span class="negative">Faltam ${Math.round(faltaDiagonal)} cm para cobrir a diagonal</span>\n`;
+          } else {
+            content += `    <span class="${arrastaDiagonal > 0 ? 'negative' : 'positive'}">${arrastaDiagonal > 0 ? 'Arrasta ' + Math.round(arrastaDiagonal) + ' cm no chão' : 'Cobre perfeitamente'} na diagonal</span>\n`;
+          }
+          
+          content += `\n`;
+          
+          // Detalhes por canto
+          content += `  Detalhes por canto:\n`;
+          cornerResults.forEach(result => {
+            const cornerResultText = () => {
+              if(result.caimento > 0) {
+                if(result.faltaChao <= 0) {
+                  const sobra = Math.abs(result.faltaChao);
+                  return sobra > 0 ? 
+                    `<span class="positive">Cai ${Math.round(result.caimento)} cm (encosta no chão)</span>` :
+                    `<span class="positive">Cai ${Math.round(result.caimento)} cm (encosta no chão - justo)</span>`;
+                }
+                return `<span class="warning">Cai ${Math.round(result.caimento)} cm (faltam ${Math.round(result.faltaChao)} cm)</span>`;
+              }
+              return `<span class="positive">Cobre exatamente</span>`;
+            };
+            
+            content += `  ${result.name}: ${cornerResultText()}\n`;
+          });
+          
+          content += `\n`;
+          
+          // CONCLUSÃO BASEADA NOS CÁLCULOS DETALHADOS
+          if(toalhaAdequada) {
+            if(maxCaimento > 0) {
+              content += `  <span class="positive">CONCLUSÃO: Toalha adequada para a mesa. Caimento máximo: ${Math.round(maxCaimento)} cm</span>\n\n`;
+            } else if(minCaimento > 0) {
+              content += `  <span class="negative">CONCLUSÃO: Toalha menor que a mesa. Não cobre completamente</span>\n\n`;
+            } else {
+              content += `  <span class="positive">CONCLUSÃO: Toalha cobre exatamente a mesa</span>\n\n`;
+            }
+          } else {
+            const maiorArrasta = Math.max(arrastaComprimento, arrastaLargura, arrastaDiagonal);
+            content += `  <span class="negative">CONCLUSÃO: Toalha maior que a altura da mesa. Arrasta no chão ${Math.round(maiorArrasta)} cm</span>\n\n`;
+          }
+          
+        } else {
+          // TOALHA RETANGULAR EM MESA RETANGULAR (código existente)
+          const tw = t.w, th = t.h;
+          const towLeft = state.x - tw/2, towRight = state.x + tw/2;
+          const towTop = state.y - th/2, towBottom = state.y + th/2;
+
+          const faltaEsquerda = Math.max(0, towLeft - tLeft);
+          const faltaDireita = Math.max(0, tRight - towRight);
+          const faltaTopo = Math.max(0, towTop - tTop);
+          const faltaBase = Math.max(0, tBottom - towBottom);
+
+          const caiEsquerda = Math.max(0, tLeft - towLeft);
+          const caiDireita = Math.max(0, towRight - tRight);
+          const caiTopo = Math.max(0, tTop - towTop);
+          const caiBase = Math.max(0, towBottom - tBottom);
+
+          const faltaChaoEsquerda = Math.max(0, mesa.altura - caiEsquerda);
+          const faltaChaoDireita = Math.max(0, mesa.altura - caiDireita);
+          const faltaChaoTopo = Math.max(0, mesa.altura - caiTopo);
+          const faltaChaoBase = Math.max(0, mesa.altura - caiBase);
+
+          const sideText = (faltaTampo, cai, faltaChao, sideName) => {
+            if(faltaTampo > 0) {
+              return `<span class="negative">Faltam ${Math.round(faltaTampo)} cm para cobrir o lado ${sideName} do tampo (faltam ${Math.round(faltaChao)} cm para chegar ao chão).</span>`;
+            }
+            if(cai > 0) {
+              if(faltaChao <= 0) {
+                const sobra = Math.abs(faltaChao);
+                return sobra > 0 ? 
+                  `<span class="positive">Cai ${Math.round(cai)} cm (encosta no chão com sobra de ${Math.round(sobra)} cm).</span>` :
+                  `<span class="positive">Cai ${Math.round(cai)} cm (encosta no chão - justo).</span>`;
+              }
+              return `<span class="warning">Cai ${Math.round(cai)} cm (faltam ${Math.round(faltaChao)} cm para chegar ao chão).</span>`;
+            }
+            return `<span class="positive">Cobre exatamente o lado ${sideName} do tampo.</span>`;
+          };
+
+          content += `  Esquerda: ${sideText(faltaEsquerda, caiEsquerda, faltaChaoEsquerda, "esquerdo")}\n`;
+          content += `  Direita: ${sideText(faltaDireita, caiDireita, faltaChaoDireita, "direito")}\n`;
+          content += `  Topo: ${sideText(faltaTopo, caiTopo, faltaChaoTopo, "superior")}\n`;
+          content += `  Base: ${sideText(faltaBase, caiBase, faltaChaoBase, "inferior")}\n`;
+          
+          let maxCaimento = Math.max(caiEsquerda, caiDireita, caiTopo, caiBase);
+          let maxFalta = Math.max(faltaEsquerda, faltaDireita, faltaTopo, faltaBase);
+          
+          if(maxCaimento > mesa.altura) {
+            const excesso = maxCaimento - mesa.altura;
+            content += `  <span class="negative">CONCLUSÃO: Toalha maior que a altura da mesa. Arrasta no chão ${Math.round(excesso)} cm</span>\n\n`;
+          } else if(maxCaimento > 0) {
+            content += `  <span class="positive">CONCLUSÃO: Toalha adequada para a mesa. Caimento máximo: ${Math.round(maxCaimento)} cm</span>\n\n`;
+          } else if(maxFalta > 0) {
+            content += `  <span class="negative">CONCLUSÃO: Toalha menor que a mesa. Não cobre completamente</span>\n\n`;
+          } else {
+            content += `  <span class="positive">CONCLUSÃO: Toalha cobre exatamente a mesa</span>\n\n`;
+          }
+        }
+      });
+    }
+
+  } else {
+    // mesa redonda
+    const diam = mesa.diametro;
+    const tableRadius = diam/2;
+    
+    title = `Resumo — ${towelStates.length} toalha(s) selecionada(s)`;
+    content = `Mesa redonda: Diâmetro ${diam} cm × Altura: ${mesa.altura} cm\n\n`;
+    
+    if(towelStates.length === 0) {
+      content += 'Nenhuma toalha selecionada. Selecione uma toalha para ver a análise.';
+    } else {
+      towelStates.forEach((state, index) => {
+        const t = state.towel;
+        const color = colorFromIndex(index);
+        
+        const instanceText = state.instanceNumber > 1 ? ` (Unidade ${state.instanceNumber})` : '';
+        
+        content += `<span style="color:${color}">● ${t.name}${instanceText}</span>\n`;
+        
+        if(t.shape === 'circle'){
+          // Toalha redonda em mesa redonda
+          const dist = Math.sqrt(state.x*state.x + state.y*state.y);
+          const towelRadius = t.w/2;
+          
+          const falta = Math.max(0, tableRadius - (towelRadius - dist));
+          const cai = Math.max(0, (towelRadius + dist) - tableRadius);
+          const faltaChao = Math.max(0, mesa.altura - cai);
+          
+          const circleText = () => {
+            if(falta > 0) {
+              return `<span class="negative">Faltam ${Math.round(falta)} cm para cobrir a borda da mesa (faltam ${Math.round(faltaChao)} cm para chegar ao chão).</span>`;
+            }
+            if(cai > 0) {
+              if(faltaChao <= 0) {
+                const sobra = Math.abs(faltaChao);
+                return sobra > 0 ? 
+                  `<span class="positive">Cai ${Math.round(cai)} cm (encosta no chão com sobra de ${Math.round(sobra)} cm).</span>` :
+                  `<span class="positive">Cai ${Math.round(cai)} cm (encosta no chão - justo).</span>`;
+              }
+              return `<span class="warning">Cai ${Math.round(cai)} cm (faltam ${Math.round(faltaChao)} cm para chegar ao chão).</span>`;
+            }
+            return `<span class="positive">Cobre exatamente a borda da mesa.</span>`;
+          };
+
+          content += `  ${circleText()}\n`;
+          
+          // Adicionar conclusão para mesa redonda
+          if(cai > mesa.altura) {
+            const excesso = cai - mesa.altura;
+            content += `  <span class="negative">CONCLUSÃO: Toalha maior que a altura da mesa. Arrasta no chão ${Math.round(excesso)} cm</span>\n\n`;
+          } else if(cai > 0) {
+            content += `  <span class="positive">CONCLUSÃO: Toalha adequada para a mesa. Caimento: ${Math.round(cai)} cm</span>\n\n`;
+          } else if(falta > 0) {
+            content += `  <span class="negative">CONCLUSÃO: Toalha menor que a mesa. Não cobre completamente</span>\n\n`;
+          } else {
+            content += `  <span class="positive">CONCLUSÃO: Toalha cobre exatamente a mesa</span>\n\n`;
+          }
+          
+        } else {
+          // Toalha QUADRADA em mesa REDONDA - CÁLCULO CORRETO PARA OS BICOS
+          const tw = t.w, th = t.h;
+          const towLeft = state.x - tw/2, towRight = state.x + tw/2;
+          const towTop = state.y - th/2, towBottom = state.y + th/2;
+          
+          // Calcular distância dos cantos da toalha ao centro da mesa
+          const corners = [
+            {x: towLeft, y: towTop, name: "canto superior esquerdo"},
+            {x: towRight, y: towTop, name: "canto superior direito"},
+            {x: towLeft, y: towBottom, name: "canto inferior esquerdo"},
+            {x: towRight, y: towBottom, name: "canto inferior direito"}
+          ];
+          
+          let maxCaimento = 0;
+          let minCaimento = Infinity;
+          const cornerResults = [];
+          
+          corners.forEach(corner => {
+            const distToCenter = Math.sqrt(corner.x**2 + corner.y**2);
+            const caimento = Math.max(0, distToCenter - tableRadius);
+            
+            cornerResults.push({
+              name: corner.name,
+              caimento: caimento,
+              faltaChao: Math.max(0, mesa.altura - caimento)
+            });
+            
+            maxCaimento = Math.max(maxCaimento, caimento);
+            minCaimento = Math.min(minCaimento, caimento);
+          });
+          
+          const faltaChaoTotal = Math.max(0, mesa.altura - maxCaimento);
+          
+          // Verificar se algum bico encosta no chão
+          const algumBicoEncostaNoChao = cornerResults.some(result => result.faltaChao <= 0);
+          
+          // Resultado geral
+          const roundText = () => {
+            if(minCaimento > 0) {
+              return `<span class="negative">Faltam ${Math.round(minCaimento)} cm para cobrir a borda da mesa (faltam ${Math.round(faltaChaoTotal)} cm para chegar ao chão).</span>`;
+            }
+            if(maxCaimento > 0) {
+              if(faltaChaoTotal <= 0) {
+                const sobra = Math.abs(faltaChaoTotal);
+                return sobra > 0 ? 
+                  `<span class="negative">Cai ${Math.round(maxCaimento)} cm (bicos encostam no chão com sobra de ${Math.round(sobra)} cm - NÃO ADEQUADO)</span>` :
+                  `<span class="negative">Cai ${Math.round(maxCaimento)} cm (bicos encostam no chão - NÃO ADEQUADO)</span>`;
+              }
+              return `<span class="warning">Cai ${Math.round(maxCaimento)} cm (faltam ${Math.round(faltaChaoTotal)} cm para chegar ao chão).</span>`;
+            }
+            return `<span class="positive">Cobre exatamente a borda da mesa.</span>`;
+          };
+
+          content += `  ${roundText()}\n`;
+          
+          // Detalhes por canto (bicos)
+          content += `\n  Detalhes dos bicos:\n`;
+          cornerResults.forEach(result => {
+            const cornerResultText = () => {
+              if(result.caimento > 0) {
+                if(result.faltaChao <= 0) {
+                  const sobra = Math.abs(result.faltaChao);
+                  return sobra > 0 ? 
+                    `<span class="negative">Cai ${Math.round(result.caimento)} cm (encosta no chão - NÃO ADEQUADO)</span>` :
+                    `<span class="negative">Cai ${Math.round(result.caimento)} cm (encosta no chão - NÃO ADEQUADO)</span>`;
+                }
+                return `<span class="warning">Cai ${Math.round(result.caimento)} cm (faltam ${Math.round(result.faltaChao)} cm)</span>`;
+              }
+              return `<span class="positive">Cobre exatamente</span>`;
+            };
+            
+            content += `  ${result.name}: ${cornerResultText()}\n`;
+          });
+          
+          // Adicionar conclusão para mesa redonda com toalha quadrada
+          if(algumBicoEncostaNoChao) {
+            content += `  <span class="negative">CONCLUSÃO: Toalha NÃO adequada para a mesa. Bicos encostam no chão</span>\n\n`;
+          } else if(maxCaimento > 0) {
+            content += `  <span class="positive">CONCLUSÃO: Toalha adequada para a mesa. Caimento máximo: ${Math.round(maxCaimento)} cm</span>\n\n`;
+          } else if(minCaimento > 0) {
+            content += `  <span class="negative">CONCLUSÃO: Toalha menor que a mesa. Não cobre completamente</span>\n\n`;
+          } else {
+            content += `  <span class="positive">CONCLUSÃO: Toalha cobre exatamente a mesa</span>\n\n`;
+          }
+        }
+      });
+    }
+  }
+  
+  resumoTitle.innerText = title;
+  resumoContent.innerHTML = content;
+}
+
+/* Função para copiar resumo */
+copyButton.addEventListener('click', () => {
+  const textToCopy = resumoContent.innerText;
+  navigator.clipboard.writeText(textToCopy).then(() => {
+    const originalText = copyButton.textContent;
+    copyButton.textContent = 'Copiado!';
+    setTimeout(() => {
+      copyButton.textContent = originalText;
+    }, 2000);
+  }).catch(err => {
+    console.error('Erro ao copiar texto: ', err);
+  });
+});
+
+/* Event listener para o checkbox Mostrar Medidas */
+showMeasuresCheckbox.addEventListener('change', () => {
+  drawAll();
+});
+
+/* Initial draw */
+drawAll();
+updateDimensionsUI();
+</script>
+</body>
+</html>

@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sousplat Rattan Elegante | Locação para Festas e Eventos</title>
+    <meta name="description" content="Alugue sousplat rattan sofisticado para sua festa. Transforme sua mesa com peças exclusivas para locação.">
+    <style>
+        :root {
+            --primary: #FF4DFF;
+            --secondary: #8B7355;
+            --accent: #000000;
+            --light: #f8f5f2;
+            --dark: #FF4DFF;
+            --text: #333333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        /* Header Styles */
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+        
+        /* Main Content Styles */
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            background: linear-gradient(rgba(255,255,255,0.9), rgba(255,255,255,0.9)), url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23f8f5f2"/><path d="M0 0L100 100M100 0L0 100" stroke="%238B7355" stroke-width="1" opacity="0.1"/></svg>');
+            border-radius: 10px;
+            margin-bottom: 3rem;
+        }
+        
+        .hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            color: var(--text);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .cta-button:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        .product-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            align-items: center;
+            margin-bottom: 4rem;
+        }
+        
+        .product-image {
+            flex: 1;
+            min-width: 300px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s;
+        }
+        
+        .product-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .product-details {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .product-details h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        .product-details p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .features {
+            margin: 2rem 0;
+        }
+        
+        .features h3 {
+            margin-bottom: 1rem;
+            color: var(--secondary);
+        }
+        
+        .features ul {
+            list-style-type: none;
+        }
+        
+        .features li {
+            margin-bottom: 0.8rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+        
+        .benefits {
+            background-color: white;
+            padding: 3rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 3rem;
+        }
+        
+        .benefits h2 {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary);
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .benefit-item {
+            text-align: center;
+            padding: 1.5rem;
+        }
+        
+        .benefit-icon {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+        
+        .benefit-item h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        /* Footer Styles */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+        
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+            color: var(--accent);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-column ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--accent);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            color: #ccc;
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 1rem;
+                justify-content: center;
+            }
+            
+            nav ul li {
+                margin: 0 0.8rem;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .product-section {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+        <div class="header-container">
+            <a href="https://locaki.com.br/index.html" class="logo"><img src="images/image_index/logo-inverse-139x22.fw.png" width="234" height="50"></a>
+            <nav>
+                <ul>
+                    <li><a href="https://locaki.com.br/index.html">Início</a></li>
+                    <li><a href="https://locaki.com.br/produtos.html">Produtos</a></li>
+                    <li><a href="https://locaki.com.br/localizacao.html">Localização</a></li>
+                    <li><a href="#">Contato</a></li>
+                </ul>
+          </nav>
+  </div>
+</header>
+
+    <main>
+        <section class="hero">
+            <h1>Elegância Natural para Sua Mesa</h1>
+            <p>Alugue e transforme sua festa com o charme rústico e sofisticado do sousplat rattan. Peça única que combina estilo e praticidade para eventos memoráveis.</p>
+            <a href="https://locaaqui.com.br/adicionarProdutoCarrinho.html?idProduto=213" class="cta-button">Reservar Agora</a>
+        </section>
+
+        <section class="product-section">
+            <div class="product-image">
+                <img src="images/XXXXXX_fotos_produtos (89).png?id=213&tamanhoImagem=medio" alt="Sousplat Rattan para Prato 33 cm - LocaAqui">
+            </div>
+            <div class="product-details">
+                <h2>Sousplat Rattan para Prato 33 cm (N2-213)</h2>
+                <p>Adicione um toque de elegância natural à sua mesa de festa com nosso exclusivo sousplat em rattan. Perfeito para valorizar sua louça e criar uma atmosfera acolhedora e sofisticada.</p>
+                
+                <div class="features">
+                    <h3>Características Exclusivas:</h3>
+                    <ul>
+                        <li>Material natural e sustentável</li>
+                        <li>Diâmetro perfeito para pratos de 33 cm</li>
+                        <li>Design artesanal e único</li>
+                        <li>Versátil para diversos estilos de decoração</li>
+                        <li>Fácil de limpar e armazenar</li>
+                    </ul>
+                </div>
+                
+                <a href="https://locaaqui.com.br/adicionarProdutoCarrinho.html?idProduto=213" class="cta-button">Alugar Agora</a>
+            </div>
+        </section>
+
+        <section class="benefits">
+            <h2>Por Que Escolher Nossos Produtos?</h2>
+            <div class="benefits-grid">
+                <div class="benefit-item">
+                    <div class="benefit-icon">★</div>
+                    <h3>Qualidade Premium</h3>
+                    <p>Selecionamos cuidadosamente cada peça para garantir durabilidade e beleza em seu evento.</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">💎</div>
+                    <h3>Design Exclusivo</h3>
+                    <p>Peças únicas que transformam qualquer mesa comum em uma experiência memorável.</p>
+                </div>
+                <div class="benefit-item">
+                    <div class="benefit-icon">🎯</div>
+                    <h3>Praticidade</h3>
+                    <p>Solução perfeita para quem busca estilo sem complicação na organização de festas.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>LocaAqui</h3>
+                <ul>
+                    <li><a href="https://locaki.com.br/index.html">Sobre Nós</a></li>
+                    <li><a href="https://locaki.com.br/index.html">Nossa História</a></li>
+                    <li><a href="https://locaki.com.br/index.html">Blog</a></li>
+                    <li><a href="https://locaki.com.br/index.html">Trabalhe Conosco</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Produtos</h3>
+                <ul>
+                    <li><a href="https://locaki.com.br/index.html">Utensílios para Festas</a></li>
+                    <li><a href="https://locaki.com.br/index.html">Decoração</a></li>
+                    <li><a href="https://locaki.com.br/index.html">Móveis</a></li>
+                    <li><a href="https://locaki.com.br/index.html">Louças</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Ajuda</h3>
+                <ul>
+                    <li><a href="https://locaki.com.br/index.html">Perguntas Frequentes</a></li>
+                    <li><a href="https://locaki.com.br/index.html">Termos de Uso</a></li>
+                    <li><a href="https://locaki.com.br/index.html">Política de Privacidade</a></li>
+                    <li><a href="https://locaki.com.br/index.html">Contato</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contato</h3>
+                <ul>
+                    <li><a href="https://locaki.com.br/index.html">WhatsApp: (11) 99999-9999</a></li>
+                    <li><a href="https://locaki.com.br/index.html">Email: contato@locaaqui.com.br</a></li>
+                    <li><a href="https://locaki.com.br/index.html">Endereço: São Paulo, SP</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2023 LocaAqui - Locação de Utensílios para Festas. Todos os direitos reservados.
+        </div>
+    </footer>
+</body>
+</html>
