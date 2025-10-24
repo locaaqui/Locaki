@@ -2,12 +2,10 @@
 <html lang="pt-BR">
 <head>
 	<script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-        
-          gtag('config', 'AW-17439775028');
-    </script>
+		if (window.location.hostname === 'locaki.com.br') {
+		    window.location.href = 'https://www.locaki.com.br' + window.location.pathname;
+		}
+	</script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -90,11 +88,14 @@
             // <event_parameters>
           });
         </script>
+		
 		<script>
-		if (window.location.hostname === 'locaki.com.br') {
-		    window.location.href = 'https://www.locaki.com.br' + window.location.pathname;
-		}
-		</script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+        
+          gtag('config', 'AW-17439775028');
+    </script>
 
 </head>
 <body>
