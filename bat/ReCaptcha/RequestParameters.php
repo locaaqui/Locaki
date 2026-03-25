@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * This is a PHP library that handles calling reCAPTCHA.
  *
@@ -101,3 +101,9 @@ class RequestParameters
         return http_build_query($this->toArray(), '', '&');
     }
 }
+
+        <!-- whatsapp flutuante -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <a href="https://wa.me/5511971537112?text=Ol%C3%A1%20eu%20estava%20no%20site%20e%20gostaria%20de%20alugar%20itens%20para%20minha%20festa" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Fale conosco pelo WhatsApp">
+          <i style="margin-top:18px" class="fa fa-whatsapp"></i>
+        </a>

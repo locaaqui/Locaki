@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 if (!isset($_GET['s'])) {
   die('You must define a search term!');
 }
@@ -43,7 +43,12 @@ foreach ($files as $file) {
 
   $contents = file_get_contents($file);
   preg_match("/\<title\>(.*)\<\/title\>/", $contents, $page_title); //getting page title
-  if (preg_match("#\<body.*\>(.*)\<\/body\>#si", $contents, $body_content)) { //getting content only between <body></body> tags
+  if (preg_match("#\<body.*\>(.*)\<\/body\>#si", $contents, $body_content)) { //getting content only between <body>        <!-- whatsapp flutuante -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <a href="https://wa.me/5511971537112?text=Ol%C3%A1%20eu%20estava%20no%20site%20e%20gostaria%20de%20alugar%20itens%20para%20minha%20festa" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Fale conosco pelo WhatsApp">
+          <i style="margin-top:18px" class="fa fa-whatsapp"></i>
+        </a>
+</body> tags
     $clean_content = strip_tags($body_content[0]); //remove html tags
     $clean_content = preg_replace('/\s+/', ' ', $clean_content); //remove duplicate whitespaces, carriage returns, tabs, etc
 

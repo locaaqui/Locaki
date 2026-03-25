@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html class="wide wow-animation" lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -75,32 +75,7 @@
         }
 
         /* Efeito para o botão WhatsApp flutuante */
-        .whatsapp-float {
-            position:fixed;
-            width:70px;
-            height:70px;
-            bottom:40px;
-            right:70px;
-            background: linear-gradient(135deg, #FF4CFF 60%, #B200B2 100%);
-            color:#FFF;
-            border-radius:50%;
-            text-align:center;
-            font-size:36px;
-            box-shadow: 0 0 18px 4px #FF4CFF80, 0 2px 8px #888;
-            z-index:1000;
-            animation: pulse 1.5s infinite;
-            transition: transform 0.2s, background 0.3s;
-        }
-        .whatsapp-float:hover {
-            background: linear-gradient(135deg, #25d366 60%, #128c7e 100%);
-            transform: scale(1.12) rotate(-3deg);
-            box-shadow: 0 0 28px 8px #25d366b0, 0 2px 12px #888;
-        }
-        @keyframes pulse {
-            0% { box-shadow: 0 0 18px 4px #FF4CFF80, 0 2px 8px #888; }
-            50% { box-shadow: 0 0 32px 12px #FF4CFFb0, 0 2px 12px #888; }
-            100% { box-shadow: 0 0 18px 4px #FF4CFF80, 0 2px 8px #888; }
-        }
+
 
         /* Botões personalizados */
         .action-buttons {
@@ -648,11 +623,12 @@
             
             <!-- WhatsApp Floating Button -->
             <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
-            <a href="https://wa.me/5511971537112?text=Olá%20gostaria%20de%20alugar%20bancos%20para%20minha%20cerimônia%20de%20casamento" 
-               class="whatsapp-float" target="_blank" rel="noopener" aria-label="Fale conosco pelo WhatsApp">
-                <i style="margin-top:18px" class="fa fa-whatsapp"></i>
-            </a>
-        </footer>
+        <!-- whatsapp flutuante -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <a href="https://wa.me/5511971537112?text=Ol%C3%A1%20eu%20estava%20no%20site%20e%20gostaria%20de%20alugar%20itens%20para%20minha%20festa" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Fale conosco pelo WhatsApp">
+          <i style="margin-top:18px" class="fa fa-whatsapp"></i>
+        </a>
+      </footer>
     </div>
 
     <!-- Global Mailform Output -->

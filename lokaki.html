@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
@@ -135,35 +135,7 @@
       display: inline-block;
     }
     /* WhatsApp Floating Button */
-    .whatsapp-float {
-      position: fixed;
-      width: 64px;
-      height: 64px;
-      bottom: 32px;
-      right: 32px;
-      background: #FF4CFF;
-      color: #fff;
-      border-radius: 50%;
-      text-align: center;
-      font-size: 38px;
-      box-shadow: 0 4px 16px #888;
-      z-index: 1000;
-      animation: pulse 1.5s infinite;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.2s;
-    }
-    .whatsapp-float:hover {
-      background: #B200B2;
-      color: #fff;
-      text-decoration: none;
-    }
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 #FF4CFF88; }
-      70% { box-shadow: 0 0 0 16px #FF4CFF00; }
-      100% { box-shadow: 0 0 0 0 #FF4CFF00; }
-    }
+
     /* Responsive */
     @media (max-width: 900px) {
       .product-listing { flex-direction: column; align-items: center; }
@@ -274,11 +246,7 @@
   </section>
 
   <!-- WhatsApp Flutuante Animado -->
-  <a href="https://wa.me/5511971537112?text=Olá%20gostaria%20de%20informações%20sobre%20locação%20de%20bancos%20e%20cadeiras%20para%20cerimônia" class="whatsapp-float" target="_blank" aria-label="WhatsApp">
-    <i class="fa fa-whatsapp"></i>
-  </a>
-
-  <!-- Footer -->
+<!-- Footer -->
   <footer class="section footer-corporate context-dark" style="margin-top:40px;">
     <div class="footer-corporate-inset">
       <div class="container">
@@ -323,6 +291,11 @@
     <div class="snackbars" id="form-output-global"></div>
     <script src="Site2/js/core.min.js"></script>
     <script src="Site2/js/script.js"></script>
-  </footer>
+          <!-- whatsapp flutuante -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+        <a href="https://wa.me/5511971537112?text=Ol%C3%A1%20eu%20estava%20no%20site%20e%20gostaria%20de%20alugar%20itens%20para%20minha%20festa" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Fale conosco pelo WhatsApp">
+          <i style="margin-top:18px" class="fa fa-whatsapp"></i>
+        </a>
+      </footer>
 </body>
 </html>
