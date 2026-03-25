@@ -354,8 +354,6 @@
             cursor: pointer;
         }
         
-        @keyframes pulse {
-            0% { transform: translateX(-50%) scale(1); }
             50% { transform: translateX(-50%) scale(1.05); }
             100% { transform: translateX(-50%) scale(1); }
         }
@@ -403,28 +401,7 @@
         }
         
         /* Botão WhatsApp flutuante */
-        .whatsapp-float {
-            position: fixed;
-            width: 70px;
-            height: 70px;
-            bottom: 40px;
-            right: 70px;
-            background: linear-gradient(135deg, #FF4CFF 60%, #B200B2 100%);
-            color: #FFF;
-            border-radius: 50%;
-            text-align: center;
-            font-size: 36px;
-            box-shadow: 0 0 18px 4px #FF4CFF80, 0 2px 8px #888;
-            z-index: 1000;
-            animation: pulse 1.5s infinite;
-            transition: transform 0.2s, background 0.3s;
-        }
         
-        .whatsapp-float:hover {
-            background: linear-gradient(135deg, #25d366 60%, #128c7e 100%);
-            transform: scale(1.12) rotate(-3deg);
-            box-shadow: 0 0 28px 8px #25d366b0, 0 2px 12px #888;
-        }
         
         /* Preloader */
         .preloader {
