@@ -5,4 +5,9 @@
 <file name="Post.php" server="ftp.locaki.com.br" local="134043137259821359" remote="133869132000000000" Dst="0" />
 <file name="Socket.php" server="ftp.locaki.com.br" local="134043137268882387" remote="133869132000000000" Dst="0" />
 <file name="SocketPost.php" server="ftp.locaki.com.br" local="134043137268882387" remote="133869132000000000" Dst="0" />
+<file name="Curl.php" server="ftp.ambientarti.com.br" local="134043137259810706" remote="134058687600000000" Dst="0" />
+<file name="CurlPost.php" server="ftp.ambientarti.com.br" local="134043137259810706" remote="134058687600000000" Dst="0" />
+<file name="Post.php" server="ftp.ambientarti.com.br" local="134043137259821359" remote="134058687600000000" Dst="0" />
+<file name="Socket.php" server="ftp.ambientarti.com.br" local="134043137268882387" remote="134058687600000000" Dst="0" />
+<file name="SocketPost.php" server="ftp.ambientarti.com.br" local="134043137268882387" remote="134058687600000000" Dst="0" />
 </dwsync>

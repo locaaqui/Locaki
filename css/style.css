@@ -467,7 +467,7 @@ h6,
 .h7 {
 	font: 700 14px/24px "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 	text-transform: uppercase;
-	color: #414141;
+	color: #FFFFFF;
 }
 
 .text-bigger, .quote-default {
@@ -4940,7 +4940,7 @@ html .button-black-outline .badge {
 }
 
 .open > .context-dark .button-black-outline.dropdown-toggle, .open > .bg-black .button-black-outline.dropdown-toggle, .open > .bg-gray-darker .button-black-outline.dropdown-toggle, .open > .bg-gray-dark .button-black-outline.dropdown-toggle, .open > .bg-mine-shaft .button-black-outline.dropdown-toggle, .open > .bg-cod-gray .button-black-outline.dropdown-toggle, .open > .bg-accent .button-black-outline.dropdown-toggle, .context-dark .button-black-outline:hover, .bg-black .button-black-outline:hover, .bg-gray-darker .button-black-outline:hover, .bg-gray-dark .button-black-outline:hover, .bg-mine-shaft .button-black-outline:hover, .bg-cod-gray .button-black-outline:hover, .bg-accent .button-black-outline:hover {
-	color: #414141;
+	color: #FFFFFF;
 	background-color: #fff;
 	border-color: #fff;
 }
@@ -5143,7 +5143,7 @@ fieldset[disabled] .bg-accent .button-black-outline {
 }
 
 .page .icon-tundora {
-	color: #414141;
+	color: #FFFFFF;
 }
 
 .page .icon-gray-dark-filled {
@@ -5177,7 +5177,7 @@ fieldset[disabled] .bg-accent .button-black-outline {
 }
 
 .page a.icon-tundora-inverse, .page a.icon-tundora-inverse:active, .page a.icon-tundora-inverse:focus {
-	color: #414141;
+	color: #FFFFFF;
 }
 
 .page a.icon-tundora-inverse:hover {
@@ -8278,7 +8278,7 @@ blockquote cite {
 }
 
 .page .link-tundora, .page .link-tundora:active, .page .link-tundora:focus {
-	color: #414141;
+	color: #FFFFFF;
 }
 
 .page .link-tundora:hover {
@@ -8286,7 +8286,7 @@ blockquote cite {
 }
 
 .page .link-tundora-inverse, .page .link-tundora-inverse:active, .page .link-tundora-inverse:focus {
-	color: #414141;
+	color: #FFFFFF;
 }
 
 .page .link-tundora-inverse:hover {
@@ -8387,7 +8387,7 @@ blockquote cite {
 }
 
 .context-dark .link-tundora, .bg-black .link-tundora, .bg-gray-darker .link-tundora, .bg-gray-dark .link-tundora, .bg-mine-shaft .link-tundora, .bg-cod-gray .link-tundora, .bg-accent .link-tundora, .context-dark .link-tundora:active, .bg-black .link-tundora:active, .bg-gray-darker .link-tundora:active, .bg-gray-dark .link-tundora:active, .bg-mine-shaft .link-tundora:active, .bg-cod-gray .link-tundora:active, .bg-accent .link-tundora:active, .context-dark .link-tundora:focus, .bg-black .link-tundora:focus, .bg-gray-darker .link-tundora:focus, .bg-gray-dark .link-tundora:focus, .bg-mine-shaft .link-tundora:focus, .bg-cod-gray .link-tundora:focus, .bg-accent .link-tundora:focus {
-	color: #414141;
+	color: #FFFFFF;
 }
 
 .context-dark .link-tundora:hover, .bg-black .link-tundora:hover, .bg-gray-darker .link-tundora:hover, .bg-gray-dark .link-tundora:hover, .bg-mine-shaft .link-tundora:hover, .bg-cod-gray .link-tundora:hover, .bg-accent .link-tundora:hover {
@@ -15173,7 +15173,7 @@ html.rd-navbar-sidebar-linked body {
 }
 
 .open > .rd-navbar-corporate-light.rd-navbar-static .rd-search-results-live .search-submit.dropdown-toggle, .rd-navbar-corporate-light.rd-navbar-static .rd-search-results-live .search-submit:hover {
-	color: #414141;
+	color: #FFFFFF;
 	background-color: #fff;
 	border-color: #fff;
 }
@@ -16897,7 +16897,7 @@ html.boxed .rd-navbar--is-clone {
 	position: relative;
 	height: 12px;
 	width: 12px;
-	background: #414141;
+	background: #FFFFFF;
 	transition: .33s all ease;
 }
 
@@ -16916,7 +16916,7 @@ html.boxed .rd-navbar--is-clone {
 
 .slick-dots-variant-1 .slick-dots li.slick-active button,
 .slick-dots-variant-1 .slick-dots li:hover button {
-	background: #414141;
+	background: #FFFFFF;
 }
 
 .slick-dots-variant-1 .slick-dots li.slick-active button::before,

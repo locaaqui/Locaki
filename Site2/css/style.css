@@ -3356,8 +3356,8 @@ hr {
 
 .button-gray-7, .button-gray-7:focus {
 	color: #ffffff;
-	background-color: #414141;
-	border-color: #414141;
+	background-color: #FFFFFF;
+	border-color: #FFFFFF;
 }
 
 .button-gray-7:hover, .button-gray-7:active {
@@ -3375,7 +3375,7 @@ hr {
 }
 
 .button-gray-7.button-pipaluk::before, .button-gray-7.button-pipaluk:focus::before {
-	background: #414141;
+	background: #FFFFFF;
 	border-color: #ffffff;
 }
 
@@ -3389,12 +3389,12 @@ hr {
 }
 
 .button-gray-7.button-wapasha, .button-gray-7.button-wapasha:focus {
-	color: #414141;
+	color: #FFFFFF;
 	background: transparent;
 }
 
 .button-gray-7.button-wapasha::before, .button-gray-7.button-wapasha:focus::before {
-	border-color: #414141;
+	border-color: #FFFFFF;
 }
 
 .button-gray-7.button-wapasha::after, .button-gray-7.button-wapasha:focus::after {

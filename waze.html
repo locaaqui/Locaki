@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html class="wide wow-animation" lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <!-- Redirecionamento otimizado para 3 segundos -->
+    <meta http-equiv="refresh" content="3; URL='https://www.waze.com/pt-BR/live-map/directions/br/sp/locaki-aluguel-de-materiais-para-festa-Jundiai-ki-festa-?utm_source=waze_website&utm_campaign=waze_website&utm_medium=website_menu&to=place.ChIJPZsTh7snz5QRbsV6WYt-nNw'"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LOCAKI - Localize-nos facilmente via WAZE. A maneira mais rápida e inteligente de chegar até nós em Jundiaí." />
+    <meta name="keywords" content="Waze Locaki, como chegar na Locaki, localização Locaki Jundiaí, aluguel festa Jundiaí, direções Waze" />
+    <meta name="author" content="Locaki">
+    <title>Locaki - Localização via Waze | Chegue fácil e rápido</title>
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    
+    <!-- Otimização de performance - CSS crítico inline -->
+    <style>
+      /* CSS crítico para primeira renderização */
+      .preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #fff;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      
+      .waze-persuasion {
+        background: linear-gradient(135deg, #33ccff 0%, #5cb0ff 100%);
+        color: white;
+        padding: 20px;
+        border-radius: 15px;
+        text-align: center;
+        margin: 30px auto;
+        max-width: 800px;
+        box-shadow: 0 10px 30px rgba(0, 107, 255, 0.2);
+        animation: pulse 2s infinite;
+      }
+      
+      @keyframes pulse {
+        0% { transform: scale(1); }
+        50% { transform: scale(1.02); }
+        100% { transform: scale(1); }
+      }
+      
+      .waze-button {
+        background: #33ccff;
+        color: white;
+        padding: 18px 40px;
+        border-radius: 50px;
+        font-size: 1.3rem;
+        font-weight: bold;
+        text-decoration: none;
+        display: inline-block;
+        margin: 20px 0;
+        transition: all 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0, 107, 255, 0.3);
+      }
+      
+      .waze-button:hover {
+        background: #2299dd;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(0, 107, 255, 0.4);
+      }
+      
+      .benefits-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin: 30px 0;
+      }
+      
+      .benefit-card {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      }
+      
+      .benefit-icon {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+        color: #33ccff;
+      }
+      
+      .countdown {
+        font-size: 2.5rem;
+        font-weight: bold;
+        color: #ff4444;
+        margin: 20px 0;
+      }
+      
+      .ie-panel{display: none;}
+    </style>
+    
+    <!-- Carregamento diferido de fontes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@400&display=swap" rel="stylesheet">
+    
+    <!-- CSS não crítico carregado de forma assíncrona -->
+    <link rel="stylesheet" href="Site2/css/bootstrap.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="Site2/css/fonts.css" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="Site2/css/style.css" media="print" onload="this.media='all'">
+    
+    <noscript>
+      <link rel="stylesheet" href="Site2/css/bootstrap.css">
+      <link rel="stylesheet" href="Site2/css/fonts.css">
+      <link rel="stylesheet" href="Site2/css/style.css">
+    </noscript>
+  </head>
+  <body>
+    <div class="preloader">
+      <div class="preloader-body">
+        <p>Abrindo Waze...</p>
+        <img src="images/logo-default-450x372.fw.png" alt="Locaki" style="max-width: 200px;">
+        <div class="countdown" id="countdown">3</div>
+        <p>Você será redirecionado automaticamente</p>
+      </div>
+    </div>
+
+    <div class="page">
+      <!-- Seção de persuasão Waze -->
+      <section class="waze-persuasion">
+       <img src="images/logo-default-450x37branco.png" alt="Locaki" style="max-width: 200px;"> <h2>🚗 Chegue mais rápido e fácil na Locaki!</h2><img src="images/logo-default-450x372.fw.png" alt="Locaki" style="max-width: 200px;">
+        <p class="lead">O Waze mostra o caminho mais rápido, considerando o trânsito em tempo real.</p>
+        
+        <a href="https://ul.waze.com/ul?venue_id=205260320.2052275523.38386380&overview=yes&utm_campaign=default&utm_source=waze_website&utm_medium=lm_share_location" 
+           class="waze-button" 
+           onclick="trackWazeClick()">
+          📍 ABRIR NO WAZE AGORA
+        </a>
+        
+        <p class="small">Não tem o Waze? <a href="https://www.waze.com/pt-BR/download" style="color: white; text-decoration: underline;" target="_blank">Baixe aqui gratuitamente</a></p>
+      </section>
+
+      <!-- Seção de fallback para caso o redirecionamento falhe -->
+      <section class="container mt-5">
+        <div class="row justify-content-center">
+          <div class="col-md-8 text-center">
+            <h3>📍 Nossa Localização</h3>
+            <p class="lead">
+              Av. Comendador Antônio Borin, 4600 - Caxambu<br>
+              Jundiaí - SP, CEP 13218-665
+            </p>
+            
+            <div class="mt-4">
+              <a href="https://www.waze.com/pt-BR/live-map/directions/br/sp/locaki-aluguel-de-materiais-para-festa-Jundiai-ki-festa-?utm_source=waze_website&utm_campaign=waze_website&utm_medium=website_menu&to=place.ChIJPZsTh7snz5QRbsV6WYt-nNw" 
+                 class="btn btn-primary btn-lg mx-2" 
+                 onclick="trackWazeClick()">
+                <i class="fa fa-map-marker"></i> Abrir no Waze
+              </a>
+              
+              <a href="https://www.google.com/maps/dir//Locaki+-+Aluguel+de+festa+Jundiai+-+Av.+Comendador+Ant%C3%B4nio+Borin,+4600+-+Caxambu,+Jundia%C3%AD+-+SP,+13218-665,+Brasil/@-23.1677226,-46.8821129,13z/data=!4m8!4m7!1m0!1m5!1m1!1s0x94cf27bb87139b3d:0xdc9c7e8b597ac56e!2m2!1d-46.847218!2d-23.1677439" 
+                 class="btn btn-outline-primary btn-lg mx-2" 
+                 target="_blank">
+                <i class="fa fa-google"></i> Google Maps
+              </a>
+            </div>
+            
+            <!-- Testemunho social -->
+            <div class="alert alert-info mt-4">
+              <p><strong>📱 Dica dos nossos clientes:</strong><br>
+              "Usando o Waze chegamos 15 minutos mais rápido! O app mostrou um caminho alternativo que não conhecíamos."<br>
+              <small>- Cliente satisfeito</small></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Botão flutuante do WhatsApp -->
+      <a href="https://wa.me/5511971537112?text=Olá%20eu%20estava%20no%20site%20e%20gostaria%20de%20mais%20informações%20sobre%20locação" 
+         class="whatsapp-float" 
+         target="_blank"
+         aria-label="Chamar no WhatsApp">
+        <i class="fa fa-whatsapp"></i>
+      </a>
+    </div>
+
+    <!-- Scripts otimizados -->
+    </script><script>
+      // Contador regressivo
+      let countdown = 3;
+      const countdownElement = document.getElementById('countdown');
+      
+      const countdownInterval = setInterval(() => {
+        countdown--;
+        if (countdownElement) {
+          countdownElement.textContent = countdown;
+        }
+        if (countdown <= 0) {
+          clearInterval(countdownInterval);
+        }
+      }, 1000);
+
+      // Esconder preloader quando a página carregar
+      window.addEventListener('load', function() {
+        setTimeout(function() {
+          document.querySelector('.preloader').style.opacity = '0';
+          setTimeout(function() {
+            document.querySelector('.preloader').style.display = 'none';
+          }, 500);
+        }, 1000);
+      });
+
+      // Rastreamento de cliques no Waze
+      function trackWazeClick() {
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'waze_click', {
+            'event_category': 'navigation',
+            'event_label': 'waze_button'
+          });
+        }
+        
+        // Fallback para Analytics tradicional
+        if (typeof ga !== 'undefined') {
+          ga('send', 'event', 'Navigation', 'Click', 'Waze Button');
+        }
+        
+        // Abre em nova aba após um pequeno delay para rastreamento
+        setTimeout(function() {
+          window.open('https://www.waze.com/pt-BR/live-map/directions/br/sp/locaki-aluguel-de-materiais-para-festa-Jundiai-ki-festa-?utm_source=waze_website&utm_campaign=waze_website&utm_medium=website_menu&to=place.ChIJPZsTh7snz5QRbsV6WYt-nNw', '_blank');
+        }, 100);
+        
+        return false;
+      }
+
+      // Carregamento lazy de imagens
+      document.addEventListener("DOMContentLoaded", function() {
+        const images = document.querySelectorAll('img');
+        images.forEach(img => {
+          img.loading = 'lazy';
+        });
+      });
+    </script>
+
+    <!-- Scripts não críticos carregados no final -->
+    <script src="Site2/js/core.min.js" defer></script>
+    <script src="Site2/js/script.js" defer></script>
+    
+    <!-- Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+      /* Estilos do botão do WhatsApp */
+      .whatsapp-float {
+        position: fixed;
+        width: 60px;
+        height: 60px;
+        bottom: 40px;
+        right: 40px;
+        background-color: #25d366;
+        color: #FFF;
+        border-radius: 50px;
+        text-align: center;
+        font-size: 30px;
+        box-shadow: 2px 2px 10px rgba(0,0,0,0.2);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+      }
+      
+      .whatsapp-float:hover {
+        background-color: #128C7E;
+        transform: scale(1.1);
+        box-shadow: 3px 3px 15px rgba(0,0,0,0.3);
+      }
+      
+      .whatsapp-float i {
+        margin-top: 4px;
+      }
+    </style>
+  </body>
+</html>

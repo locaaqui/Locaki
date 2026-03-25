@@ -5,4 +5,9 @@
 <file name="RequestParameters.php" server="ftp.locaki.com.br" local="134043137277986423" remote="133869132000000000" Dst="0" />
 <file name="Response.php" server="ftp.locaki.com.br" local="134043137277997475" remote="133869132000000000" Dst="0" />
 <file name="autoload.php" server="ftp.locaki.com.br" local="134043137278007844" remote="133869132000000000" Dst="0" />
+<file name="autoload.php" server="ftp.ambientarti.com.br" local="134043137278007844" remote="134058687600000000" Dst="0" />
+<file name="ReCaptcha.php" server="ftp.ambientarti.com.br" local="134043137250696112" remote="134058687600000000" Dst="0" />
+<file name="RequestMethod.php" server="ftp.ambientarti.com.br" local="134043137268952803" remote="134058687600000000" Dst="0" />
+<file name="RequestParameters.php" server="ftp.ambientarti.com.br" local="134043137277986423" remote="134058687600000000" Dst="0" />
+<file name="Response.php" server="ftp.ambientarti.com.br" local="134043137277997475" remote="134058687600000000" Dst="0" />
 </dwsync>
